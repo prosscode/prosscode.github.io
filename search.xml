@@ -3,6 +3,156 @@
   
     
     <entry>
+      <title><![CDATA[命名法(#编程规范)]]></title>
+      <url>/2017/09/12/%E5%91%BD%E5%90%8D%E6%B3%95-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p> 驼峰式命名法 &amp; 帕斯卡命名法 | 匈牙利命名法  | 下划线命名法</p>
+</blockquote>
+<h2 id="驼峰式命名法"><a href="#驼峰式命名法" class="headerlink" title="驼峰式命名法"></a><strong>驼峰式命名法</strong></h2><blockquote>
+<p>驼峰式命名法(CamelCase)是电脑程式编写时的一套命名规则，当变量名或函数式名是由一个或多个单字连接在一起而构成的唯一识别字时采用驼峰式命名法，一般分为小驼峰命名法和大驼峰命名法。</p>
+</blockquote>
+<ul>
+<li><strong>小驼峰法</strong></li>
+</ul>
+<p>变量一般用小驼峰法标识。小驼峰法的意思是：除第一个单词之外，其他单词首字母大写。</p>
+<p>比如：<code>int myStudentCount</code>   变量myStudentCount第一个单词全部小写，后面的单词首字母大写。</p>
+<ul>
+<li><strong>大驼峰法（即帕斯卡命名法）</strong></li>
+</ul>
+<p>相比小驼峰法，大驼峰法把第一个单词的首字母大写，常用于类名，函数名，属性，命名空间。</p>
+<p>比如：<code>public class DataBaseUser</code>  类名DataBaseUser首字母单词全部大写。</p>
+<h2 id="匈牙利命名法"><a href="#匈牙利命名法" class="headerlink" title="匈牙利命名法"></a><strong>匈牙利命名法</strong></h2><blockquote>
+<p>匈牙利命名法师一种编程时的命名规范。基本原则是：<strong>变量名 =属性+类型+对象描述</strong>，其中每一对象的名称都要求有明确含义，可以取对象名字全程或名字的一部分。</p>
+</blockquote>
+<p>匈牙利命名法关键是：标识符代码名字以一个或者多个小写字母开头作为前缀，前缀之后的是首字母大写的一个单词或多个单词组合，该单词要指明变量的用途。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">前缀</th>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">数组</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">BOOL(int)</td>
+<td style="text-align:center">布尔(整数)</td>
+</tr>
+<tr>
+<td style="text-align:center">by</td>
+<td style="text-align:center">Unsigned Char(Byte)</td>
+<td style="text-align:center">无符号字符(字节)</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">Char</td>
+<td style="text-align:center">字符(字节)</td>
+</tr>
+<tr>
+<td style="text-align:center">cb</td>
+<td style="text-align:center">Count of bytes</td>
+<td style="text-align:center">字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">cr</td>
+<td style="text-align:center">Color reference value</td>
+<td style="text-align:center">颜色(参考)值</td>
+</tr>
+<tr>
+<td style="text-align:center">cx，cy</td>
+<td style="text-align:center">Count of x,y (Short int)</td>
+<td style="text-align:center">x,y的集合(短整数)</td>
+</tr>
+<tr>
+<td style="text-align:center">dw</td>
+<td style="text-align:center">DWORD (unsigned long)</td>
+<td style="text-align:center">双字(无符号长整数)</td>
+</tr>
+<tr>
+<td style="text-align:center">f</td>
+<td style="text-align:center">Flags (usually multiple bit values)</td>
+<td style="text-align:center">标志(一般是有多位的数值)</td>
+</tr>
+<tr>
+<td style="text-align:center">fn</td>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">函数</td>
+</tr>
+<tr>
+<td style="text-align:center">g_</td>
+<td style="text-align:center">global</td>
+<td style="text-align:center">全局的</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:center">Integer</td>
+<td style="text-align:center">整型</td>
+</tr>
+<tr>
+<td style="text-align:center">l</td>
+<td style="text-align:center">Long int</td>
+<td style="text-align:center">长整数</td>
+</tr>
+<tr>
+<td style="text-align:center">msg</td>
+<td style="text-align:center">message</td>
+<td style="text-align:center">消息</td>
+</tr>
+<tr>
+<td style="text-align:center">n</td>
+<td style="text-align:center">Short Int</td>
+<td style="text-align:center">短整型</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td style="text-align:center">Pointer</td>
+<td style="text-align:center">指针</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">字符串型</td>
+</tr>
+<tr>
+<td style="text-align:center">v</td>
+<td style="text-align:center">void</td>
+<td style="text-align:center">空</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+</tr>
+</tbody>
+</table>
+<p>举例：</p>
+<p><code>pfnEatApple</code>   pfn是类型描述，表示指向函数的指针；EatApple是变量对象描述，所以它表示指向EatApple函数的函数指针变量。</p>
+<p><code>g_cch</code>  g_是属性描述表示全局变量，c和ch分别是计数类型和字符类型，所以它表示一个对字符进行计数的全局变量。</p>
+<blockquote>
+<p>注：匈牙利命名法在C语言是难以实施，在C++语言中是无法实施</p>
+</blockquote>
+<h2 id="下划线命名法"><a href="#下划线命名法" class="headerlink" title="下划线命名法"></a><strong>下划线命名法</strong></h2><p>下划线命名法比较好理解，相比较于驼峰命名法来说，函数名中的每一个逻辑断点处都需要一个下划线来标记。</p>
+<p>举例：<code>int my_student_count</code>  在每个单字母之间用下划线来标记分隔。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 个人博客 </tag>
+            
+            <tag> 编程规范 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Hexo+GitHub博客搭建]]></title>
       <url>/2017/09/07/Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -19,25 +169,25 @@
 <p> 然后右上角选择<a href="https://github.com/new" target="_blank" rel="external">Create a new respsitory</a></p>
 <p> Repository name处填写yourname.github.io(yourname与你的注册名一致，这个就是你的博客域名)</p>
 <p> 然后Create repository完成</p>
-<p> <img src="/images/Hexo+GitHub博客搭建/1.png" alt=""></p>
+<p> <img src="/2017/09/07/Hexo+GitHub博客搭建/1.png" alt=""></p>
 <blockquote>
 <p>1、例如我的域名是<a href="https://prosscode.github.io/">https://prosscode.github.io/</a>,就填入prosscode.github.io<br> 2、你可以自己选择项目为公开的(public)开始私密的(private)</p>
 </blockquote>
 <hr>
 <h3 id="node-js和Git环境配置"><a href="#node-js和Git环境配置" class="headerlink" title="node.js和Git环境配置"></a><strong>node.js和Git环境配置</strong></h3><p>安装<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a> 和 <a href="https://github.com/waylau/git-for-win" target="_blank" rel="external">Git从国内下载需要翻墙，这里提供Git国内镜像下载</a></p>
-<p>安装完成后,在开始菜单里找“Git-Git Bash”,打开输入:<br><code>$ git config --global user.name &quot;your github username&quot;</code><br>​<br>回车再次输入:<br><code>$ git config --global user.email &quot;your github email&quot;</code><br>​<br> <img src="/images/Hexo+GitHub博客搭建/2.png" alt=""><br>​<br>查看Git配置信息:<br><code>$ git config --list</code><br>​<br> <img src="/images/Hexo+GitHub博客搭建/3.png" alt=""></p>
+<p>安装完成后,在开始菜单里找“Git-Git Bash”,打开输入:<br><code>$ git config --global user.name &quot;your github username&quot;</code><br>​<br>回车再次输入:<br><code>$ git config --global user.email &quot;your github email&quot;</code><br>​<br> <img src="/2017/09/07/Hexo+GitHub博客搭建/2.png" alt=""><br>​<br>查看Git配置信息:<br><code>$ git config --list</code><br>​<br> <img src="/2017/09/07/Hexo+GitHub博客搭建/3.png" alt=""></p>
 <blockquote>
 <p>1、github username是你的github账号，github email是你的github邮箱</p>
 </blockquote>
 <hr>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a><strong>安装Hexo</strong></h3><p>环境搭建完成后就使用npm安装Hexo，打开cmder输入:<br><code>$ npm install -g hexo-cli</code><br>​<br> <img src="/images/Hexo+GitHub博客搭建/4.png" alt=""><br>​    </p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a><strong>安装Hexo</strong></h3><p>环境搭建完成后就使用npm安装Hexo，打开cmder输入:<br><code>$ npm install -g hexo-cli</code><br>​<br> <img src="/2017/09/07/Hexo+GitHub博客搭建/4.png" alt=""><br>​    </p>
 <blockquote>
 <p>1、Hexo现在最新的版本是3.3.8<br>2、安装hexo等待的时间会很长，请耐心等待不要关闭安装窗口</p>
 </blockquote>
 <hr>
-<h3 id="博客设置"><a href="#博客设置" class="headerlink" title="博客设置"></a><strong>博客设置</strong></h3><p>安装完hexo框架后，在电脑磁盘内新建文件夹，命名为HexoBlog，进入文件夹按住Shift键点击鼠标右键，选择cmder here<br>​<br> <img src="/images/Hexo+GitHub博客搭建/5.png" alt=""><br>​<br>没有配置cmder环境变量的点击“在此处打开命令窗口”<br>​<br>输入: <code>λ hexo init blog</code><br>​<br>成功后提示：<br><code>INFO  Start blogging with Hexo!</code><br>​<br>接下来输入:<br><code>λ hexo generate</code><br><code>λ hexo server</code></p>
+<h3 id="博客设置"><a href="#博客设置" class="headerlink" title="博客设置"></a><strong>博客设置</strong></h3><p>安装完hexo框架后，在电脑磁盘内新建文件夹，命名为HexoBlog，进入文件夹按住Shift键点击鼠标右键，选择cmder here<br>​<br> <img src="/2017/09/07/Hexo+GitHub博客搭建/5.png" alt=""><br>​<br>没有配置cmder环境变量的点击“在此处打开命令窗口”<br>​<br>输入: <code>λ hexo init blog</code><br>​<br>成功后提示：<br><code>INFO  Start blogging with Hexo!</code><br>​<br>接下来输入:<br><code>λ hexo generate</code><br><code>λ hexo server</code></p>
 <p>成功提示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INFO  Start processing</div><div class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</div></pre></td></tr></table></figure></p>
-<p>访问<a href="http://localhost:4000/" target="_blank" rel="external">localhost:4000</a>就可以看到网站的初始模样<br>​<br><img src="/images/Hexo+GitHub博客搭建/6.png" alt=""><br>​<br>重新打开cmder输入：<br><code>λ ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</code></p>
+<p>访问<a href="http://localhost:4000/" target="_blank" rel="external">localhost:4000</a>就可以看到网站的初始模样<br>​<br><img src="/2017/09/07/Hexo+GitHub博客搭建/6.png" alt=""><br>​<br>重新打开cmder输入：<br><code>λ ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</code></p>
 <p>一路Enter，得到信息：<br><code>Your public key has been saved in /c/Users/user/.ssh/id_rsa.pub.</code><br>​<br>然后找到该文件打开(sublime text)，复制里面所有内容，然后进入<a href="https://github.com/settings/keys" target="_blank" rel="external">Github.settinhs/key</a>，New SSH key—Title：blog—key：输入你刚复制的—Add SSH key<br>​    </p>
 <blockquote>
 <p>1、<code>hexo init name</code>命令会在HexoBlog文件夹下创建一个名为name的文件夹,并初始化hexo设置,并在source目录下自带一篇hello world文章<br>2、<code>hexo generate</code>命令是生成静态文件，可简写为：<code>hexo g</code><br>3、<code>hexo server</code>命令是启动本地服务，可简写为：<code>hexo s</code><br>4、访问<a href="http://localhost:4000/" target="_blank" rel="external">localhost:4000</a>必须要先执行<code>hexo s</code></p>
@@ -67,7 +217,7 @@
 <p>1、<code>hexo clean</code> 清除缓存，网页正常显示的情况下可以不用</p>
 </blockquote>
 <h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a><strong>发布</strong></h2><p>刚我们只是在本地查看了博客，现在我们发布到网上，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">C:\HexoBlog\blog</div><div class="line">npm install hexo-deployer-git --save</div><div class="line">...</div><div class="line"></div><div class="line">C:\HexoBlog\blog</div><div class="line">λ hexo deploy</div><div class="line">INFO  Deploying: git</div><div class="line">INFO  Clearing .deploy_git folder...</div><div class="line">INFO  Copying files from public folder...</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p> <img src="/images/Hexo+GitHub博客搭建/7.png" alt=""></p>
+<p> <img src="/2017/09/07/Hexo+GitHub博客搭建/7.png" alt=""></p>
 <p>跳出Github登录，直接登录</p>
 <p>然后输入进入浏览器输入<a href="https://prosscode.github.io/">https://yourname.github.io/</a></p>
 <p>然后就可以看到已经发布了</p>
