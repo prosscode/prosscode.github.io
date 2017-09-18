@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://prosscode.github.io/"/>
-  <updated>2017-09-12T16:44:57.539Z</updated>
+  <updated>2017-09-18T10:23:51.858Z</updated>
   <id>https://prosscode.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode:Second Highest Salary(#176)</title>
+    <link href="https://prosscode.github.io/2017/09/18/LeetCode-Second-Highest-Salary-176/"/>
+    <id>https://prosscode.github.io/2017/09/18/LeetCode-Second-Highest-Salary-176/</id>
+    <published>2017-09-18T08:36:52.000Z</published>
+    <updated>2017-09-18T10:23:51.858Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th style="text-align:center">编号</th><th style="text-align:center">标题</th><th style="text-align:center">等级</th></tr></thead><tbody><tr><td style="text-align:center">176</td><td style="text-align:center">Second Highest Salary</td><td style="text-align:center">Easy</td></tr></tbody></table><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>编写SQL查询，从<code>Employee</code>表中获得第二高的工资。</p><table><thead><tr><th style="text-align:center">Id</th><th style="text-align:center">Salary</th></tr></thead><tbody><tr><td style="text-align:center">1</td><td style="text-align:center">100</td></tr><tr><td style="text-align:center">2</td><td style="text-align:center">200</td></tr><tr><td style="text-align:center">3</td><td style="text-align:center">300</td></tr></tbody></table><p>例如，给定上述Employee表，查询应该返回200作为第二高的工资。 如果没有第二高的工资，则查询应返回null。</p><table><thead><tr><th style="text-align:center">SecondHighestSalary</th></tr></thead><tbody><tr><td style="text-align:center">200</td></tr></tbody></table><h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>按照下降的顺序排列工资，然后利用limit子句获得第二高工资</p><h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><h3 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h3><p>使用查询语句的时候，要返回前几条或者中间某几行数据，Limit子句可以被用于强制Select语句返回指定的记录数。</p><p>语法：<code>select * from table limit m,n</code>，为了兼容PostgreSQL，支持<code>limit * from table m offset n</code></p><p>实例：<code>select * from table limit 2,4</code>，即取出第3条至第6条数据。</p><h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><p>去重，返回唯一不同的值。</p><h3 id="desc"><a href="#desc" class="headerlink" title="desc"></a>desc</h3><p>按降序排列。asc，按升序排列。</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">(select distinct Salary from Employee </div><div class="line">order by Salary desc </div><div class="line">limit 1 offset 1) as SecondHighestSalary</div></pre></td></tr></table></figure><hr><h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>利用IFNULL函数解决返回null的问题</p><h2 id="要点-1"><a href="#要点-1" class="headerlink" title="要点"></a>要点</h2><h3 id="ifnull函数"><a href="#ifnull函数" class="headerlink" title="ifnull函数"></a>ifnull函数</h3><p>语法 ：</p><p><code>ifnull(expr1,expr2)</code>，如果expr1不是null，ifnull()返回expr1，否则返回expr2。<code>ifnull(expr1,expr2,expr3)</code>，如果expr1是true，那么ifnull()返回expr2，否则它返回expr3。</p><h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">ifnull(select distic Salary </div><div class="line">from employee order by Salary desc </div><div class="line">limit 1 offser 1),null) as SecondHighestSalary</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;编号&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;标题&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;等级&lt;/th&gt;
+&lt;/tr&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="LeetCode" scheme="https://prosscode.github.io/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>命名法(#编程规范)</title>
@@ -69,31 +98,6 @@
       <category term="个人博客" scheme="https://prosscode.github.io/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="GitHub &amp; Hexo" scheme="https://prosscode.github.io/tags/GitHub-Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>prosscodeTestArticle</title>
-    <link href="https://prosscode.github.io/2017/09/02/prosscodeTestArticle/"/>
-    <id>https://prosscode.github.io/2017/09/02/prosscodeTestArticle/</id>
-    <published>2017-09-02T09:56:09.000Z</published>
-    <updated>2017-09-08T07:39:53.383Z</updated>
-    
-    <content type="html"><![CDATA[<p>This is a test article, welcome to focus on the author blog [1]: <a href="https://prosscode.github.io/">https://prosscode.github.io/</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;This is a test article, welcome to focus on the author blog [1]: &lt;a href=&quot;https://prosscode.github.io/&quot;&gt;https://prosscode.github.io/&lt;/a&gt;&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="prossTest" scheme="https://prosscode.github.io/tags/prossTest/"/>
-    
-      <category term="tagsTest" scheme="https://prosscode.github.io/tags/tagsTest/"/>
     
   </entry>
   
