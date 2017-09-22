@@ -3,6 +3,38 @@
   
     
     <entry>
+      <title><![CDATA[网易校招面试题(#1)]]></title>
+      <url>/2017/09/23/%E7%BD%91%E6%98%93%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E9%A2%98-1/</url>
+      <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>小易准备去魔法王国采购魔法神器,购买魔法神器需要使用魔法币,但是小易现在一枚魔法币都没有,但是小易有两台魔法机器可以通过投入x(x可以为0)个魔法币产生更多的魔法币。</p>
+<p>魔法机器1:如果投入x个魔法币,魔法机器会将其变为2x+1个魔法币</p>
+<p>魔法机器2:如果投入x个魔法币,魔法机器会将其变为2x+2个魔法币</p>
+<p>小易采购魔法神器总共需要n个魔法币,所以小易只能通过两台魔法机器产生恰好n个魔法币,小易需要你帮他设计一个投入方案使他最后恰好拥有n个魔法币。</p>
+</blockquote>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>魔法机器1只能产生奇数，魔法机器2只能产生偶数。</p>
+<p>从n不断按奇偶倒推回0就可以解决。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">        <span class="keyword">while</span> (in.hasNext()) &#123;</div><div class="line">            <span class="keyword">int</span> coinCount = in.nextInt();</div><div class="line">            StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">            <span class="keyword">while</span> (coinCount &gt; <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (coinCount % <span class="number">2</span> == <span class="number">0</span>) &#123;</div><div class="line">                    <span class="comment">//偶数</span></div><div class="line">                    coinCount = (coinCount - <span class="number">2</span>) / <span class="number">2</span>;</div><div class="line">                    sb.append(<span class="string">"2"</span>);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">//奇数</span></div><div class="line">                    coinCount = (coinCount - <span class="number">1</span>) / <span class="number">2</span>;</div><div class="line">                    sb.append(<span class="string">"1"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            System.out.println(sb.reverse().toString());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      
+        
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 校招面试题 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[LeetCode:Non-decreasing Array(#665)]]></title>
+      <url>/2017/09/21/LeetCode-Non-decreasing-Array-665/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode:Second Highest Salary(#176)]]></title>
       <url>/2017/09/18/LeetCode-Second-Highest-Salary-176/</url>
       <content type="html"><![CDATA[<table>
@@ -21,7 +53,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>编写SQL查询，从<code>Employee</code>表中获得第二高的工资。</p>
+<h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p>编写SQL查询，从<code>Employee</code>表中获得第二高的工资。</p>
 <table>
 <thead>
 <tr>
@@ -57,24 +89,25 @@
 </tr>
 </tbody>
 </table>
-<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>按照下降的顺序排列工资，然后利用limit子句获得第二高工资</p>
-<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><h3 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h3><p>使用查询语句的时候，要返回前几条或者中间某几行数据，Limit子句可以被用于强制Select语句返回指定的记录数。</p>
+<h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>按照下降的顺序排列工资，然后利用limit子句获得第二高工资</p>
+<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><h4 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h4><p>使用查询语句的时候，要返回前几条或者中间某几行数据，Limit子句可以被用于强制Select语句返回指定的记录数。</p>
 <p>语法：<code>select * from table limit m,n</code>，为了兼容PostgreSQL，支持<code>limit * from table m offset n</code></p>
 <p>实例：<code>select * from table limit 2,4</code>，即取出第3条至第6条数据。</p>
-<h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><p>去重，返回唯一不同的值。</p>
-<h3 id="desc"><a href="#desc" class="headerlink" title="desc"></a>desc</h3><p>按降序排列。asc，按升序排列。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	(select distinct Salary from Employee </div><div class="line">	order by Salary desc </div><div class="line">	limit 1 offset 1) as SecondHighestSalary</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>利用IFNULL函数解决返回null的问题</p>
-<h2 id="要点-1"><a href="#要点-1" class="headerlink" title="要点"></a>要点</h2><h3 id="ifnull函数"><a href="#ifnull函数" class="headerlink" title="ifnull函数"></a>ifnull函数</h3><p>语法 ：</p>
-<p><code>ifnull(expr1,expr2)</code>，如果expr1不是null，ifnull()返回expr1，否则返回expr2。<code>ifnull(expr1,expr2,expr3)</code>，如果expr1是true，那么ifnull()返回expr2，否则它返回expr3。</p>
-<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	ifnull(select distic Salary </div><div class="line">	from employee order by Salary desc </div><div class="line">	limit 1 offser 1),null) as SecondHighestSalary</div></pre></td></tr></table></figure>
+<h4 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h4><p>去重，返回唯一不同的值。</p>
+<p>####desc</p>
+<p>按降序排列。asc，按升序排列。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	(select distinct Salary from Employee </div><div class="line">	order by Salary desc </div><div class="line">	limit 1 offset 1) as SecondHighestSalary</div></pre></td></tr></table></figure>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>利用IFNULL函数解决返回null的问题</p>
+<h3 id="要点-1"><a href="#要点-1" class="headerlink" title="要点 "></a><strong>要点 </strong></h3><h4 id="ifnull函数"><a href="#ifnull函数" class="headerlink" title="ifnull函数"></a>ifnull函数</h4><p>语法 ：<code>ifnull(expr1,expr2)</code>，如果expr1不是null，ifnull()返回expr1，否则返回expr2。<code>ifnull(expr1,expr2,expr3)</code>，如果expr1是true，那么ifnull()返回expr2，否则它返回expr3。</p>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	ifnull(select distic Salary </div><div class="line">	from employee order by Salary desc </div><div class="line">	limit 1 offser 1),null) as SecondHighestSalary</div></pre></td></tr></table></figure>
 ]]></content>
       
         
         <tags>
             
             <tag> LeetCode </tag>
+            
+            <tag> mysql </tag>
             
         </tags>
         

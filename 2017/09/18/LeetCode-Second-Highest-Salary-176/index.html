@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="LeetCode," />
+  <meta name="keywords" content="LeetCode,mysql," />
 
 
 
@@ -96,14 +96,14 @@
 
 
 <meta name="description" content="编号 标题 等级     176 Second Highest Salary Easy    要求编写SQL查询，从Employee表中获得第二高的工资。    Id Salary     1 100   2 200   3 300    例如，给定上述Employee表，查询应该返回200作为第二高的工资。 如果没有第二高的工资，则查询应返回null。    SecondHighestSa">
-<meta name="keywords" content="LeetCode">
+<meta name="keywords" content="LeetCode,mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode:Second Highest Salary(#176)">
 <meta property="og:url" content="https://prosscode.github.io/2017/09/18/LeetCode-Second-Highest-Salary-176/index.html">
 <meta property="og:site_name" content="PROSS">
 <meta property="og:description" content="编号 标题 等级     176 Second Highest Salary Easy    要求编写SQL查询，从Employee表中获得第二高的工资。    Id Salary     1 100   2 200   3 300    例如，给定上述Employee表，查询应该返回200作为第二高的工资。 如果没有第二高的工资，则查询应返回null。    SecondHighestSa">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-18T10:23:51.858Z">
+<meta property="og:updated_time" content="2017-09-21T11:42:16.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode:Second Highest Salary(#176)">
 <meta name="twitter:description" content="编号 标题 等级     176 Second Highest Salary Easy    要求编写SQL查询，从Employee表中获得第二高的工资。    Id Salary     1 100   2 200   3 300    例如，给定上述Employee表，查询应该返回200作为第二高的工资。 如果没有第二高的工资，则查询应返回null。    SecondHighestSa">
@@ -417,7 +417,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>编写SQL查询，从<code>Employee</code>表中获得第二高的工资。</p>
+<h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p>编写SQL查询，从<code>Employee</code>表中获得第二高的工资。</p>
 <table>
 <thead>
 <tr>
@@ -453,18 +453,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>按照下降的顺序排列工资，然后利用limit子句获得第二高工资</p>
-<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><h3 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h3><p>使用查询语句的时候，要返回前几条或者中间某几行数据，Limit子句可以被用于强制Select语句返回指定的记录数。</p>
+<h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>按照下降的顺序排列工资，然后利用limit子句获得第二高工资</p>
+<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><h4 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h4><p>使用查询语句的时候，要返回前几条或者中间某几行数据，Limit子句可以被用于强制Select语句返回指定的记录数。</p>
 <p>语法：<code>select * from table limit m,n</code>，为了兼容PostgreSQL，支持<code>limit * from table m offset n</code></p>
 <p>实例：<code>select * from table limit 2,4</code>，即取出第3条至第6条数据。</p>
-<h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><p>去重，返回唯一不同的值。</p>
-<h3 id="desc"><a href="#desc" class="headerlink" title="desc"></a>desc</h3><p>按降序排列。asc，按升序排列。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	(select distinct Salary from Employee </div><div class="line">	order by Salary desc </div><div class="line">	limit 1 offset 1) as SecondHighestSalary</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>利用IFNULL函数解决返回null的问题</p>
-<h2 id="要点-1"><a href="#要点-1" class="headerlink" title="要点"></a>要点</h2><h3 id="ifnull函数"><a href="#ifnull函数" class="headerlink" title="ifnull函数"></a>ifnull函数</h3><p>语法 ：</p>
-<p><code>ifnull(expr1,expr2)</code>，如果expr1不是null，ifnull()返回expr1，否则返回expr2。<code>ifnull(expr1,expr2,expr3)</code>，如果expr1是true，那么ifnull()返回expr2，否则它返回expr3。</p>
-<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	ifnull(select distic Salary </div><div class="line">	from employee order by Salary desc </div><div class="line">	limit 1 offser 1),null) as SecondHighestSalary</div></pre></td></tr></table></figure>
+<h4 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h4><p>去重，返回唯一不同的值。</p>
+<p>####desc</p>
+<p>按降序排列。asc，按升序排列。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	(select distinct Salary from Employee </div><div class="line">	order by Salary desc </div><div class="line">	limit 1 offset 1) as SecondHighestSalary</div></pre></td></tr></table></figure>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>利用IFNULL函数解决返回null的问题</p>
+<h3 id="要点-1"><a href="#要点-1" class="headerlink" title="要点 "></a><strong>要点 </strong></h3><h4 id="ifnull函数"><a href="#ifnull函数" class="headerlink" title="ifnull函数"></a>ifnull函数</h4><p>语法 ：<code>ifnull(expr1,expr2)</code>，如果expr1不是null，ifnull()返回expr1，否则返回expr2。<code>ifnull(expr1,expr2,expr3)</code>，如果expr1是true，那么ifnull()返回expr2，否则它返回expr3。</p>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">select </div><div class="line">	ifnull(select distic Salary </div><div class="line">	from employee order by Salary desc </div><div class="line">	limit 1 offser 1),null) as SecondHighestSalary</div></pre></td></tr></table></figure>
 
       
 
@@ -540,6 +539,8 @@
           
             <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-tag"></i>LeetCode</a>
           
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i>mysql</a>
+          
         </div>
       
 
@@ -560,6 +561,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/21/LeetCode-Non-decreasing-Array-665/" rel="prev" title="LeetCode:Non-decreasing Array(#665)">
+                LeetCode:Non-decreasing Array(#665) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -641,7 +646,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -654,7 +659,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -720,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#要求"><span class="nav-number">1.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路1"><span class="nav-number">2.</span> <span class="nav-text">思路1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要点"><span class="nav-number">3.</span> <span class="nav-text">要点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Limit"><span class="nav-number">3.1.</span> <span class="nav-text">Limit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distinct"><span class="nav-number">3.2.</span> <span class="nav-text">distinct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#desc"><span class="nav-number">3.3.</span> <span class="nav-text">desc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">4.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路2"><span class="nav-number">5.</span> <span class="nav-text">思路2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要点-1"><span class="nav-number">6.</span> <span class="nav-text">要点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ifnull函数"><span class="nav-number">6.1.</span> <span class="nav-text">ifnull函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-1"><span class="nav-number">7.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#要求"><span class="nav-number">1.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路1"><span class="nav-number">2.</span> <span class="nav-text">思路1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要点"><span class="nav-number">3.</span> <span class="nav-text">要点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Limit"><span class="nav-number">3.1.</span> <span class="nav-text">Limit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct"><span class="nav-number">3.2.</span> <span class="nav-text">distinct</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">4.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路2"><span class="nav-number">5.</span> <span class="nav-text">思路2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要点-1"><span class="nav-number">6.</span> <span class="nav-text">要点 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ifnull函数"><span class="nav-number">6.1.</span> <span class="nav-text">ifnull函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-1"><span class="nav-number">7.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
 
           </div>
@@ -761,7 +766,7 @@
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
     <span title="Site words total count">
-      2.8k
+      3.1k
     </span>
   
 </div>
