@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="LeetCode,java," />
 
 
 
@@ -95,17 +95,18 @@
 
 
 
-<meta name="description" content="心有猛虎  细嗅蔷薇">
+<meta name="description" content="编号 标题 等级     665 Non-decreasing Array Easy    要求给定一个包含n个整数的数组，通过修改最多1个元素来检查是否可以变为非递减。 我们这样定义一个数组是非递减的：如果array [i] &amp;lt;= array [i + 1]对于每个i（1 &amp;lt;= i &amp;lt;n）成立。 Note：The n belongs to [1,10000]. 举例1：">
+<meta name="keywords" content="LeetCode,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode:Non-decreasing Array(#665)">
 <meta property="og:url" content="https://prosscode.github.io/2017/09/21/LeetCode-Non-decreasing-Array-665/index.html">
 <meta property="og:site_name" content="PROSS">
-<meta property="og:description" content="心有猛虎  细嗅蔷薇">
+<meta property="og:description" content="编号 标题 等级     665 Non-decreasing Array Easy    要求给定一个包含n个整数的数组，通过修改最多1个元素来检查是否可以变为非递减。 我们这样定义一个数组是非递减的：如果array [i] &amp;lt;= array [i + 1]对于每个i（1 &amp;lt;= i &amp;lt;n）成立。 Note：The n belongs to [1,10000]. 举例1：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-21T11:36:30.682Z">
+<meta property="og:updated_time" content="2017-09-28T08:29:38.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode:Non-decreasing Array(#665)">
-<meta name="twitter:description" content="心有猛虎  细嗅蔷薇">
+<meta name="twitter:description" content="编号 标题 等级     665 Non-decreasing Array Easy    要求给定一个包含n个整数的数组，通过修改最多1个元素来检查是否可以变为非递减。 我们这样定义一个数组是非递减的：如果array [i] &amp;lt;= array [i + 1]对于每个i（1 &amp;lt;= i &amp;lt;n）成立。 Note：The n belongs to [1,10000]. 举例1：">
 
 
 
@@ -374,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  300
                 </span>
               
 
@@ -400,7 +401,34 @@
 
 
       
-        
+        <table>
+<thead>
+<tr>
+<th style="text-align:center">编号</th>
+<th style="text-align:center">标题</th>
+<th style="text-align:center">等级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">665</td>
+<td style="text-align:center">Non-decreasing Array</td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p>给定一个包含n个整数的数组，通过修改最多1个元素来检查是否可以变为非递减。</p>
+<p>我们这样定义一个数组是非递减的：如果array [i] &lt;= array [i + 1]对于每个i（1 &lt;= i &lt;n）成立。</p>
+<p>Note：The <code>n</code> belongs to [1,10000].</p>
+<p>举例1：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input：[<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">Output：	True</div><div class="line">Explanation：You could modify the first</div><div class="line"><span class="number">4</span> to <span class="number">1</span> </div><div class="line">  to get a non-decreasing array.</div></pre></td></tr></table></figure>
+<p>举例2：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Input：[<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>]</div><div class="line">Output：	False</div><div class="line">Explannation：You can not get a non-decreasing array by modify at most one element.</div></pre></td></tr></table></figure>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>要求是非递减数组，且最多修改一个元素。</p>
+<p>我们比较[i]和[i+1]下标的元素大小，如果[i] &gt; [i+1]，不是递减数组，继续往下判断。如果i &gt; 0，且[i+1] &lt; [i-1]，则把[i+1]的值赋给[i]，这样交换一次就能得到这三个数是递减排列。</p>
+<p>循环比较，若继续判断[i] &gt; [i+1]，则返回False，否则返回True。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checkPossibility</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> n = nums.length;</div><div class="line">      	<span class="keyword">int</span> bool = <span class="number">0</span>; 	<span class="comment">// 判定Boolean值</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i + <span class="number">1</span> &lt; n; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[i + <span class="number">1</span>]) &#123;</div><div class="line">                count++;</div><div class="line">                <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i + <span class="number">1</span>] &lt; nums[i - <span class="number">1</span>]) &#123;</div><div class="line">                    nums[i + <span class="number">1</span>] = nums[i];</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> nums[i] = nums[i + <span class="number">1</span>];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> bool &lt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
 
       
@@ -470,6 +498,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-tag"></i>LeetCode</a>
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i>java</a>
+          
+        </div>
       
 
       
@@ -546,8 +582,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -565,7 +610,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -578,7 +623,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -635,6 +680,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#要求"><span class="nav-number">1.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -669,7 +730,7 @@
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
     <span title="Site words total count">
-      3.1k
+      3.8k
     </span>
   
 </div>
