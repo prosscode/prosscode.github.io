@@ -1866,7 +1866,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #571142;
+  background: #ffb1aa;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2641,7 +2641,7 @@ pre .javascript .function {
 .header {
   position: relative;
   margin: 0 auto;
-  width: 61%;
+  width: 58%;
 /*
   width: $main-desktop;
   */
@@ -2694,7 +2694,7 @@ pre .javascript .function {
   clear: both;
 }
 .container .main-inner {
-  width: 61%;
+  width: 58%;
 /*
   width: $main-desktop;
   */
@@ -2713,7 +2713,7 @@ pre .javascript .function {
   float: right;
   box-sizing: border-box;
   padding: 40px;
-  width: calc(100% - 252px);
+  width: calc(100% - 250px);
 /*
   width: $content-desktop;
   */
