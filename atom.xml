@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://prosscode.github.io/"/>
-  <updated>2018-03-26T01:02:07.956Z</updated>
+  <updated>2018-03-30T13:36:53.915Z</updated>
   <id>https://prosscode.github.io/</id>
   
   <author>
@@ -21,19 +21,21 @@
     <link href="https://prosscode.github.io/2018/Hadoop-HA%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"/>
     <id>https://prosscode.github.io/2018/Hadoop-HA集群搭建/</id>
     <published>2018-03-25T00:58:34.000Z</published>
-    <updated>2018-03-26T01:02:07.956Z</updated>
+    <updated>2018-03-30T13:36:53.915Z</updated>
     
-    <content type="html"><![CDATA[<!-- build time:Fri Mar 30 2018 21:36:08 GMT+0800 (中国标准时间) --><!-- rebuild by neat -->]]></content>
+    <content type="html"><![CDATA[<!-- build time:Fri Mar 30 2018 21:37:00 GMT+0800 (中国标准时间) --><!-- rebuild by neat -->]]></content>
     
     <summary type="html">
     
       
       
-        &lt;!-- build time:Fri Mar 30 2018 21:36:08 GMT+0800 (中国标准时间) --&gt;&lt;!-- rebuild by neat --&gt;
+        &lt;!-- build time:Fri Mar 30 2018 21:37:00 GMT+0800 (中国标准时间) --&gt;&lt;!-- rebuild by neat --&gt;
       
     
     </summary>
     
+    
+      <category term="BigData" scheme="https://prosscode.github.io/tags/BigData/"/>
     
   </entry>
   
