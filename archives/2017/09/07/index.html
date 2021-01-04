@@ -1,68 +1,134 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>Hexo+GitHub博客搭建 | PROSS</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="generator" content="Hexo 5.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Hexo+GitHub博客搭建</h1><a id="logo" href="/.">PROSS</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a class="current" href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a><a href="/daysmatter/"><i class="fa fa-home"> DaysMatter</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Hexo+GitHub博客搭建</h1><div class="post-meta">Sep 7, 2017</div><a class="disqus-comment-count" data-disqus-identifier="archives/2017/09/07/" href="/archives/2017/09/07/#disqus_thread"></a><div class="post-content"><blockquote>
+<p>Hexo框架</p>
+<p>GitHub 托管</p>
+</blockquote>
+<a id="more"></a>
 
-block title
-  title= page.title + ' | ' + config.title
-
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-      if theme.wordcount == true
-        include _partial/wordcount.pug
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if theme.changyan
-      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
-        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
-        span= ' ' + __('Comment')
-      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
-    if theme.valine.enable
-      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
-        span.valine-comment-count(data-xid=url_for(page.path))
-        span= ' ' + __('Comment')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
-    .post-content
-      != page.content
-    if theme.donate.enable == true
-      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
-
-    if theme.post_copyright.enable == true && page.copyright != false
-      div
-        ul.post-copyright
-          li.post-copyright-author
-            strong= __('copyright_author_prefix')
-            = theme.post_copyright.author
-          li.post-copyright-link
-            strong= __('copyright_link_prefix')
-            a(href='/' + page.path)= page.permalink
-          li.post-copyright-license
-            strong= __('copyright_declare_prefix')
-            if theme.post_copyright.copyright_text
-              != theme.post_copyright.copyright_text
-            else
-              != __('copyright_default_text')
-      br
-
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
-
-    include _partial/tag.pug
-    include _partial/post_nav.pug
-
-    if page.comments
-      include _partial/comments.pug
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a><strong>准备工作</strong></h2><ul>
+<li>为什么你应该从现在开始写博客参见 - <a target="_blank" rel="noopener" href="http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/">刘未鹏-思维改变生活</a></li>
+<li>了解什么是Hexo - <a target="_blank" rel="noopener" href="https://hexo.io/">A fast, simple &amp; powerful blog framework</a></li>
+<li>Node.js &amp; Git 安装包</li>
+<li><a target="_blank" rel="noopener" href="http://cmder.net/">cmder</a>(个人建议需要，可以用cmd)</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/">GitHub账号和邮箱</a></li>
+</ul>
+<h2 id="主要步骤"><a href="#主要步骤" class="headerlink" title="主要步骤"></a><strong>主要步骤</strong></h2><h3 id="创建github项目"><a href="#创建github项目" class="headerlink" title="创建github项目"></a><strong>创建github项目</strong></h3><p> 登录自己的<a target="_blank" rel="noopener" href="https://github.com/">github</a></p>
+<p> 然后右上角选择<a target="_blank" rel="noopener" href="https://github.com/new">Create a new respsitory</a></p>
+<p> Repository name处填写yourname.github.io(yourname与你的注册名一致，这个就是你的博客域名)</p>
+<p> 然后Create repository完成</p>
+<p> <img src="Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/1.png"></p>
+<blockquote>
+<p>1、例如我的域名是<a target="_blank" rel="noopener" href="https://prosscode.github.io/">https://prosscode.github.io/</a>,就填入prosscode.github.io<br> 2、你可以自己选择项目为公开的(public)开始私密的(private)</p>
+</blockquote>
+<hr>
+<h3 id="node-js和Git环境配置"><a href="#node-js和Git环境配置" class="headerlink" title="node.js和Git环境配置"></a><strong>node.js和Git环境配置</strong></h3><p>安装<a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a> 和 <a target="_blank" rel="noopener" href="https://github.com/waylau/git-for-win">Git从国内下载需要翻墙，这里提供Git国内镜像下载</a></p>
+<p>安装完成后,在开始菜单里找“Git-Git Bash”,打开输入:<br><code>$ git config --global user.name &quot;your github username&quot;</code><br>​<br>回车再次输入:<br><code>$ git config --global user.email &quot;your github email&quot;</code><br>​<br> <img src="Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/2.png"><br>​<br>查看Git配置信息:<br><code>$ git config --list</code><br>​<br> <img src="Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/3.png"></p>
+<blockquote>
+<p>1、github username是你的github账号，github email是你的github邮箱</p>
+</blockquote>
+<hr>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a><strong>安装Hexo</strong></h3><p>环境搭建完成后就使用npm安装Hexo，打开cmder输入:<br><code>$ npm install -g hexo-cli</code><br>​<br> <img src="Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/4.png"><br>​    </p>
+<blockquote>
+<p>1、Hexo现在最新的版本是3.3.8<br>2、安装hexo等待的时间会很长，请耐心等待不要关闭安装窗口</p>
+</blockquote>
+<hr>
+<h3 id="博客设置"><a href="#博客设置" class="headerlink" title="博客设置"></a><strong>博客设置</strong></h3><p>安装完hexo框架后，在电脑磁盘内新建文件夹，命名为HexoBlog，进入文件夹按住Shift键点击鼠标右键，选择cmder here<br>​<br> <img src="Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/5.png"></p>
+<p>没有配置cmder环境变量的点击“在此处打开命令窗口”，输入: <code>λ hexo init blog </code></p>
+<p>成功后提示：<br><code>INFO  Start blogging with Hexo!</code><br>接下来输入:<br><code>λ hexo generate </code><br><code>λ hexo server </code></p>
+<p>成功提示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>访问<a target="_blank" rel="noopener" href="http://localhost:4000/">localhost:4000</a>就可以看到网站的初始模样<br>​<br><img src="Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/6.png"><br>​<br>重新打开cmder输入：<br><code>λ ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</code></p>
+<p>一路Enter，得到信息：<br><code> Your public key has been saved in /c/Users/user/.ssh/id_rsa.pub.</code><br>​<br>然后找到该文件打开(sublime text)，复制里面所有内容，然后进入<a target="_blank" rel="noopener" href="https://github.com/settings/keys">Github.settinhs/key</a>，New SSH key—Title：blog—key：输入你刚复制的—Add SSH key<br>​    </p>
+<blockquote>
+<p>1、<code>hexo init name</code>命令会在HexoBlog文件夹下创建一个名为name的文件夹,并初始化hexo设置,并在source目录下自带一篇hello world文章<br>2、<code>hexo generate</code>命令是生成静态文件，可简写为：<code>hexo g</code><br>3、<code>hexo server</code>命令是启动本地服务，可简写为：<code>hexo s</code><br>4、访问<a target="_blank" rel="noopener" href="http://localhost:4000/">localhost:4000</a>必须要先执行<code>hexo s</code></p>
+</blockquote>
+<hr>
+<h3 id="配置博客"><a href="#配置博客" class="headerlink" title="配置博客"></a><strong>配置博客</strong></h3><p>在blog目录下，用sublime打开_config.yml文件，配合我的博客信息和注释修改自己的博客信息</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration</span><br><span class="line">## Docs: https://hexo.io/docs/configuration.html</span><br><span class="line">## Source: https://github.com/hexojs/hexo/</span><br><span class="line"></span><br><span class="line"># Site #站点信息</span><br><span class="line">title: PROSS # 标题</span><br><span class="line">subtitle: Great minds have purpose, others have only wishes. # 副标题</span><br><span class="line">description: 心有猛虎  细嗅蔷薇 # 站点描述，给搜索引擎看的</span><br><span class="line">author: 彭爽 # 作者</span><br><span class="line">language: zh-Hans # 语言</span><br><span class="line">timezone: Asia/shanghai # 时区</span><br><span class="line"></span><br><span class="line"># URL #链接格式</span><br><span class="line">## If your site is put in a subdirectory, set url as &#x27;http://yoursite.com/child&#x27; and root as &#x27;/child/&#x27;</span><br><span class="line">url: http://yoursite.com # 网址</span><br><span class="line">root: / #根目录</span><br><span class="line">permalink: :year/:month/:day/:title/ # 文章的链接格式</span><br><span class="line">permalink_defaults: </span><br><span class="line">tag_dir:  # 标签目录</span><br><span class="line">archive_dir: archives # 存档目录</span><br><span class="line">category_dir: categories # 分类目录</span><br><span class="line">code_dir: downloads/code</span><br><span class="line"></span><br><span class="line"># Directory # 目录</span><br><span class="line">source_dir: source # 源文件目录</span><br><span class="line">public_dir: public # 生成的网页文件目录</span><br><span class="line"></span><br><span class="line"># Writing #写作</span><br><span class="line">new_post_name: :title.md # File name of new posts #新文章标题</span><br><span class="line">default_layout: post #默认的模板包括post、page、photo、draft(文章、页面、照片、草稿)</span><br><span class="line">titlecase: false # Transform title into titlecase #标题转换成大写</span><br><span class="line">external_link: true # Open external links in new tab #在新选项卡中打开连接</span><br><span class="line">filename_case: 0</span><br><span class="line">render_drafts: false</span><br><span class="line">post_asset_folder: true</span><br><span class="line">relative_link: false</span><br><span class="line">future: true</span><br><span class="line">highlight: # 语法高亮</span><br><span class="line">  enable: true # 是否启用</span><br><span class="line">  line_number: true # 显示行号</span><br><span class="line">  auto_detect: false</span><br><span class="line">  tab_replace:</span><br><span class="line">  </span><br><span class="line"># Home page setting</span><br><span class="line"># path: Root path for your blogs index page. (default = &#x27;&#x27;)</span><br><span class="line"># per_page: Posts displayed per page. (0 = disable pagination)</span><br><span class="line"># order_by: Posts order. (Order by date descending by default)</span><br><span class="line">index_generator:</span><br><span class="line">  path: &#x27;&#x27;</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date</span><br><span class="line">  </span><br><span class="line"># Category &amp; Tag #分类和标签</span><br><span class="line">default_category: uncategorized # 默认分类</span><br><span class="line">category_map:</span><br><span class="line">tag_map:</span><br><span class="line"># Archives</span><br><span class="line">2: 开启分页</span><br><span class="line">1: 禁止分页</span><br><span class="line">0: 全部禁用</span><br><span class="line">archive: 2</span><br><span class="line">category: 2</span><br><span class="line">tag: 2</span><br><span class="line"></span><br><span class="line"># Date / Time format # 日期时间格式</span><br><span class="line">## Hexo uses Moment.js to parse and display date</span><br><span class="line">## You can customize the date format as defined in</span><br><span class="line">## http://momentjs.com/docs/#/displaying/format/</span><br><span class="line">date_format: YYYY-MM-DD #参考http://momentjs.com/docs/#/displaying/format/</span><br><span class="line">time_format: HH:mm:ss</span><br><span class="line"></span><br><span class="line"># Pagination # 分页</span><br><span class="line">## Set per_page to 0 to disable pagination</span><br><span class="line">per_page: 10 # 每页文字数，设置为0则是禁止分页</span><br><span class="line">pagination_dir: page</span><br><span class="line"></span><br><span class="line"># Disqus #评论</span><br><span class="line">disqus_shortname:</span><br><span class="line"></span><br><span class="line"># Extensions # 拓展插件</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next #主题</span><br><span class="line">exclude_generator:</span><br><span class="line">plugins: # 插件，例如生成RSS和站点地图</span><br><span class="line"></span><br><span class="line"># Deployment # 部署</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/prosscode/prosscode.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p><strong>着重几点介绍：</strong></p>
+<ul>
+<li>修改网站相关信息<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: PROSS</span><br><span class="line">subtitle: Great minds have purpose, others have only wishes. </span><br><span class="line">description: 心有猛虎  细嗅蔷薇</span><br><span class="line">author: 彭爽 </span><br><span class="line">language: zh-Hans</span><br><span class="line">timezone: Asia/shanghai</span><br></pre></td></tr></table></figure></li>
+<li>配置部署（我的是prosscode，修改成自己的）<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/prosscode/prosscode.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1、_config.yml文件中每个参数的：后都要加一个空格</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="发表文章"><a href="#发表文章" class="headerlink" title="发表文章"></a><strong>发表文章</strong></h2><p>在cmder或cmd中输入：<code>λ hexo new &quot;prosscodeTestArticle&quot;</code></p>
+<p>得到结果：<code>INFO  Created: F:\test\blog\source\_posts\prosscodeTestArticle.md</code></p>
+<p>找到该文章，打开，使用markdown语法，该语法可以查看<a target="_blank" rel="noopener" href="http://www.cnblogs.com/ProSS/p/6616988.html">Markdown入门</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: prosscodeTestArticle</span><br><span class="line">date: 2017-09-02 17:56:09</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">This is a test article, welcome to focus on the author blog [1]: https://prosscode.github.io/</span><br></pre></td></tr></table></figure>
+<p>然后保存，执行下列步骤：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">C:\HexoBlog\blog</span><br><span class="line">λ hexo clean</span><br><span class="line">INFO  Deleted database.</span><br><span class="line">INFO  Deleted public folder.</span><br><span class="line">`</span><br><span class="line">C:\HexoBlog\blog</span><br><span class="line">λ hexo generate</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 1.48 s</span><br><span class="line">...</span><br><span class="line">INFO  29 files generated in 4.27 s</span><br><span class="line">`</span><br><span class="line">C:\HexoBlog\blog</span><br><span class="line">λ hexo server</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>这个时候，打开<a target="_blank" rel="noopener" href="http://localhost:4000/">localhost:4000</a>，发现刚才的文章已经成功了</p>
+<blockquote>
+<p>1、<code>hexo clean</code> 清除缓存，网页正常显示的情况下可以不用</p>
+</blockquote>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a><strong>发布</strong></h2><p>刚我们只是在本地查看了博客，现在我们发布到网上，执行：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\HexoBlog\blog</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">C:\HexoBlog\blog</span><br><span class="line">λ hexo deploy</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p> <img src="Hexo+GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/7.png"></p>
+<p>跳出Github登录，直接登录</p>
+<p>然后输入进入浏览器输入<a target="_blank" rel="noopener" href="https://prosscode.github.io/">https://yourname.github.io/</a></p>
+<p>然后就可以看到已经发布了</p>
+<p><a target="_blank" rel="noopener" href="https://prosscode.github.io/">我的测试博客</a></p>
+<blockquote>
+<p>1、部署前需要安装hexo-deployer-git。在此前版本模块功能是集成在hexo框架里，现在模块功能分开了，需要先安装再部署<br>2、<code>hexo deploy</code>部署，可简写为：<code>hexo d</code></p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p><strong>发布文章的步骤：</strong><br>1、hexo new 文章名<br>2、Markdown语法编辑文章<br>3、部署发布</p>
+<p><strong>简写Tips</strong></p>
+<blockquote>
+<p>1、hexo n “我的博客” == hexo new “我的博客” # 新建文章<br>2、hexo p == hexo publish<br>3、hexo g == hexo generate # 生成<br>4、hexo s == hexo server # 启动服务预览<br>5、hexo d == hexo deploy # 部署</p>
+</blockquote>
+<p>到这里已经完成了博客的搭建，但是还有很多需要设置和调整的。</p>
+<p>也许你会发现，我的博客和刚刚搭建的不太一样，因为我修改了博客主题，增加了一些插件。</p>
+<p>提供几个比较好的博文和主题推荐：<br>1.<a target="_blank" rel="noopener" href="https://hexo.io/themes/">Hexo主题介绍</a></p>
+<p>2.<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/getting-started.html">开始使用NexT主题</a>，我正在使用NexT主题下的NexT.Pisces v5.1.2。</p>
+<p>3.<a target="_blank" rel="noopener" href="http://blog.csdn.net/qq_33699981/article/details/72716951">Hexo的next主题个性化教程：打造炫酷网站</a></p>
+<p>4.Markdown编写推荐<a target="_blank" rel="noopener" href="https://typora.io/">Typora</a>和<a target="_blank" rel="noopener" href="http://markdownpad.com/download.html">MarkdownPad2</a></p>
+<p>​    </p>
+</div><div class="tags"><a href="/tags/Hexo/">Hexo</a></div><div class="post-nav"><a class="pre" href="/archives/2017/09/12/">命名法(#编程规范)</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://pross.space/archives/2017/09/07/';
+    this.page.identifier = 'archives/2017/09/07/';
+    this.page.title = 'Hexo+GitHub博客搭建';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//pross-space.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//pross-space.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://pross-space.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://pross.space"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Thrift/" style="font-size: 15px;">Thrift</a> <a href="/tags/HDFS/" style="font-size: 15px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 15px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 15px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/LeetCode/" style="font-size: 15px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MapReduce/" style="font-size: 15px;">MapReduce</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">随笔杂记</a> <a href="/tags/Swagger/" style="font-size: 15px;">Swagger</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/RPC/" style="font-size: 15px;">RPC</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/archives/2019/07/09/">Apache-Thrift-Thrift-Thrift</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/06/17/">远程过程调用</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/02/02/">使用Swagger2构建RESTful API</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/13/">散列表</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/01/">几种定时调度的介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/22/">Java线程池</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/16/">大O表示法</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/11/11/">你所忽视的排序算法（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/10/27/">你所忽视的排序算法（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/09/28/">相见</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="https://github.com/prosscode" title="Github" target="_blank">Github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">PROSS.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

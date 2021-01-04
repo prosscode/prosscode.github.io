@@ -1,68 +1,89 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>你需要多久才能变成一个&quot;傻瓜&quot; | PROSS</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="generator" content="Hexo 5.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">你需要多久才能变成一个&quot;傻瓜&quot;</h1><a id="logo" href="/.">PROSS</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a class="current" href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a><a href="/daysmatter/"><i class="fa fa-home"> DaysMatter</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">你需要多久才能变成一个&quot;傻瓜&quot;</h1><div class="post-meta">Sep 24, 2018</div><a class="disqus-comment-count" data-disqus-identifier="archives/2018/09/24/" href="/archives/2018/09/24/#disqus_thread"></a><div class="post-content"><p>金出武雄（Kanade Takeo）是美国卡内基·梅隆大学（CMU）的机器人视觉研究所所长，也是世界上最重要的计算机是视觉研究人员之一。</p>
+<p><img src="%E4%BD%A0%E9%9C%80%E8%A6%81%E5%A4%9A%E4%B9%85%E6%89%8D%E8%83%BD%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E5%82%BB%E7%93%9C%5Ckanade_takeo_2014.jpg"></p>
+<a id="more"></a>
 
-block title
-  title= page.title + ' | ' + config.title
-
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-      if theme.wordcount == true
-        include _partial/wordcount.pug
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if theme.changyan
-      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
-        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
-        span= ' ' + __('Comment')
-      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
-    if theme.valine.enable
-      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
-        span.valine-comment-count(data-xid=url_for(page.path))
-        span= ' ' + __('Comment')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
-    .post-content
-      != page.content
-    if theme.donate.enable == true
-      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
-
-    if theme.post_copyright.enable == true && page.copyright != false
-      div
-        ul.post-copyright
-          li.post-copyright-author
-            strong= __('copyright_author_prefix')
-            = theme.post_copyright.author
-          li.post-copyright-link
-            strong= __('copyright_link_prefix')
-            a(href='/' + page.path)= page.permalink
-          li.post-copyright-license
-            strong= __('copyright_declare_prefix')
-            if theme.post_copyright.copyright_text
-              != theme.post_copyright.copyright_text
-            else
-              != __('copyright_default_text')
-      br
-
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
-
-    include _partial/tag.pug
-    include _partial/post_nav.pug
-
-    if page.comments
-      include _partial/comments.pug
+<p>微信之父张小龙在《微信背后的产品观》一文中讲到：“产品经理要有傻瓜心态。”这里的傻瓜并不是真正的傻掉，而是需要有一种外行的心态，保持“stay foolish”。张小龙说，自己需要经过5~10分钟的酝酿才能达到傻瓜状态，马化腾需要1分钟，功力最深的乔布斯可以在专家和傻瓜之间随意切换，来去自如。</p>
+<p>最早听到类似的说法是通过池老师在博客中介绍的金出武雄教授。他出版了一本书，名字叫做《像外行一样思考，像专家一样实践》，关于这本书的创作，金教授如是说：</p>
+<blockquote>
+<p>听过我的演讲或言论之后，有很多人表示：“你的话，简直就是谎话，几乎都是谎话、是玩笑、像是真话，是真话，是自吹自擂、虽然很有建设性但……杂七杂八还有点意思。”于是我想，要不要把这些收集起来，写一本书呢？</p>
+</blockquote>
+<p>于是这本书就诞生了，这是一个小插曲。这本书是金教授对其日常研究、生活和学习的经验进行收集整理而成的一本小册子。但其中的内容远不止这些，无论是学术、技术、产品、演讲、写作、互联网、教育、思考的本质等，书中都有所涉猎，并且观点奇特，思路新颖，适合各个创造性领域的人群阅读。</p>
+<p><img src="%E4%BD%A0%E9%9C%80%E8%A6%81%E5%A4%9A%E4%B9%85%E6%89%8D%E8%83%BD%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E5%82%BB%E7%93%9C%5Cbook.jpg"></p>
+<p>虽然今天主题是这本书，我还没有看完这本书，但是池老师读了一遍并在<code>mactalk·跨越边界</code>上总结了，我就站在巨人的肩膀上，挑几个思考性的观点，做一下学习思考的笔记。</p>
+<h4 id="Best-First"><a href="#Best-First" class="headerlink" title="Best First"></a>Best First</h4><p>金教授有个观点叫做”Best First“，意为最好东西一定要放在最前面。无论是演讲还是写书，金教授都遵循这个规则。观众或读者都希望开始的时候就看到最好的东西，很多演讲或图书都喜欢做一些冗长的铺垫才进入主题，岂不知那些铺垫已经耗尽了我们观众的耐心。</p>
+<p>这个观点非常的有趣，基于此，我们就知道，书中的核心内容毫无疑问就是第一章：像外行一样思考，像专家一样实践。</p>
+<h4 id="关于反对"><a href="#关于反对" class="headerlink" title="关于反对"></a>关于反对</h4><blockquote>
+<p>明斯基教授，您总是能在各种领域中想出很多创造性的，引人入胜且能够引导新方向的构思。请问您的诀窍是什么呢？</p>
+<p>他回答说：这个很简单，只要反对大家的所说的就可以了。大家都认同的好想法基本上都不太令人满意。</p>
+</blockquote>
+<h4 id="关于迷茫"><a href="#关于迷茫" class="headerlink" title="关于迷茫"></a>关于迷茫</h4><blockquote>
+<p>金教授说：越能干的人越迷茫。</p>
+<p>就算是卡内基·梅隆大学的计算机科学系和机器人研究所的博士研究生，他们出类拔萃无所不能，也避免不了这种感觉。不，应该说，正是这种人，才更容易陷入不安和迷茫。</p>
+</blockquote>
+<p>如果你工作时，经常在”能不能行呢？“的不安感和“啊，成功了！”的成就感之间往复行走，那么恭喜你，离成功已经没有几公里了。交织着这两种感觉的体验将成为你智慧和体力的强有力基石。这也从某种程度上解释了我为什么会经常处于一种迷茫的状态么？</p>
+<h4 id="关于记忆力"><a href="#关于记忆力" class="headerlink" title="关于记忆力"></a>关于记忆力</h4><blockquote>
+<p>日常生活中，对于人的知觉、思考、行动等，追本溯源，最终都会落在记忆上，如果头脑中没有知识和信息作为工具、材料，是不可能发挥规划能力和创造能力的。构思就是通过重组脑海中的记忆而产生的。如果没有良好而广博的记忆内容做基础，根本产生不了什么好的构思。因此，最有效的学习方法就是记忆。把他人长时间思考总结出来的成果记忆下来，不仅高效快捷，也能为自身的思考扩展基础。当然，这里所谓的记忆，是指”经过理解的记忆”，这一点无需多言。</p>
+</blockquote>
+<h4 id="关于颠覆"><a href="#关于颠覆" class="headerlink" title="关于颠覆"></a>关于颠覆</h4><blockquote>
+<p>计算机的发展日新月异。20世纪60年代，计算机像竞赛一样指数发展，但到了20世纪80年代，发展速度减缓，甚至有人说计算机不会再进步了，还举了很多例子：硅晶体上不能画再细的线了，不能制造出更小的晶体管了，硬盘的存储密度不能再增大了，等等。根据这些说法他们得出的结论是：发展瓶颈终将到来。</p>
+</blockquote>
+<p>科学的进步就是不断突破极限和开辟新的领域，每个人的奋斗就是突破自己。</p>
+<h4 id="关于不可能原则"><a href="#关于不可能原则" class="headerlink" title="关于不可能原则"></a>关于不可能原则</h4><blockquote>
+<p>第一条：科学工作者声明某件事情是可行的时候，基本上他不会错。但当他说不可能的时候，他很可能错了。第二条：发现极限在哪里的唯一方法就是超越极限，尝试向稍微超越这个极限的领域迈进、冒险。第三条：无论是哪种技术，只要它是非常先进的，那看起来都跟魔术没什么区别。</p>
+</blockquote>
+<p>如果出现一个想法和创意，看起来不可能实现，实际上你可能错了。如果发现自己的所做的事情已经做到了极限，可以试试超越极限迈进一步。</p>
+<h4 id="关于演讲和交流"><a href="#关于演讲和交流" class="headerlink" title="关于演讲和交流"></a>关于演讲和交流</h4><blockquote>
+<p>在与他人交流的过程中完善自己的想法。无论什么样的构想，最初大都只是个偶然的想法。锤炼构想的方法就是跟他人交流，在交谈中验证是不是一个有价值的想法，并且获取相关知识，修正不完备的地方。升华构想的关键是“交流”，因为他人有很多自己角度的认识和想法，借鉴过来才能完善自己的构想。</p>
+</blockquote>
+<h4 id="创造的基础是模仿"><a href="#创造的基础是模仿" class="headerlink" title="创造的基础是模仿"></a>创造的基础是模仿</h4><blockquote>
+<p>模仿、相似，这样不是很好吗？最初的想法的确是相同的，但在此基础之上添加东西、使之升华的水平高低才是决定胜负的关键。因此，大部分的创造都是在模仿的基础之上增加其附加价值的东西。独创、创造，不是无中生有的魔术。</p>
+</blockquote>
+<p>有一段时间自己非常厌恶<code>CV战士</code>式的工作，总想造点新的轮子或工具。想要创造出的新的东西，那一定是在原有的基础上或思维格局上进行新的改造和发现。</p>
+<p>最后结尾引用池老师的总结。回到最初的问题，如何在专家和傻瓜之间进行自由的切换呢？其实金教授已经写在书里了：</p>
+<p>思考的时候，要像外行一样单纯直接，实践的时候则要像专家一样严密细致，并且要有以专业知识和方法武装起来的“我做得到”的乐观主义精神。要记住，独特的、好的创意和好的结尾，不管是对研究而言，还是对商业运营而言，都不是自己突然冒出来的东西，那一定是刻苦的努力和长期的思考带来的。</p>
+</div><div class="tags"><a href="/tags/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%AE%B0/">随笔杂记</a></div><div class="post-nav"><a class="pre" href="/archives/2018/09/28/">相见</a><a class="next" href="/archives/2018/09/10/">SparkStreaming之解析mapWithState</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://pross.space/archives/2018/09/24/';
+    this.page.identifier = 'archives/2018/09/24/';
+    this.page.title = '你需要多久才能变成一个&quot;傻瓜&quot;';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//pross-space.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//pross-space.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://pross-space.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://pross.space"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Thrift/" style="font-size: 15px;">Thrift</a> <a href="/tags/HDFS/" style="font-size: 15px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 15px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 15px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/LeetCode/" style="font-size: 15px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MapReduce/" style="font-size: 15px;">MapReduce</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">随笔杂记</a> <a href="/tags/Swagger/" style="font-size: 15px;">Swagger</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/RPC/" style="font-size: 15px;">RPC</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/archives/2019/07/09/">Apache-Thrift-Thrift-Thrift</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/06/17/">远程过程调用</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/02/02/">使用Swagger2构建RESTful API</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/13/">散列表</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/01/">几种定时调度的介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/22/">Java线程池</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/16/">大O表示法</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/11/11/">你所忽视的排序算法（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/10/27/">你所忽视的排序算法（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/09/28/">相见</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="https://github.com/prosscode" title="Github" target="_blank">Github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">PROSS.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

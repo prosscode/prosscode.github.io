@@ -1,68 +1,173 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>Hadoop集群环境搭建 | PROSS</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="generator" content="Hexo 5.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Hadoop集群环境搭建</h1><a id="logo" href="/.">PROSS</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a class="current" href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a><a href="/daysmatter/"><i class="fa fa-home"> DaysMatter</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Hadoop集群环境搭建</h1><div class="post-meta">Mar 3, 2018</div><a class="disqus-comment-count" data-disqus-identifier="archives/2018/03/03/" href="/archives/2018/03/03/#disqus_thread"></a><div class="post-content"><p>学习Hadoop第一步，从Hadoop集群环境的搭建开始。</p>
+<a id="more"></a>
 
-block title
-  title= page.title + ' | ' + config.title
-
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-      if theme.wordcount == true
-        include _partial/wordcount.pug
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if theme.changyan
-      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
-        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
-        span= ' ' + __('Comment')
-      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
-    if theme.valine.enable
-      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
-        span.valine-comment-count(data-xid=url_for(page.path))
-        span= ' ' + __('Comment')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
-    .post-content
-      != page.content
-    if theme.donate.enable == true
-      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
-
-    if theme.post_copyright.enable == true && page.copyright != false
-      div
-        ul.post-copyright
-          li.post-copyright-author
-            strong= __('copyright_author_prefix')
-            = theme.post_copyright.author
-          li.post-copyright-link
-            strong= __('copyright_link_prefix')
-            a(href='/' + page.path)= page.permalink
-          li.post-copyright-license
-            strong= __('copyright_declare_prefix')
-            if theme.post_copyright.copyright_text
-              != theme.post_copyright.copyright_text
-            else
-              != __('copyright_default_text')
-      br
-
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
-
-    include _partial/tag.pug
-    include _partial/post_nav.pug
-
-    if page.comments
-      include _partial/comments.pug
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li><p>虚拟机（VMware Workstation）</p>
+</li>
+<li><p>Xshell5</p>
+</li>
+<li><p>Linux系统（CentOS-6.7-x86_64-bin-iso）</p>
+</li>
+<li><p>Hadoop编译后的安装包（hadoop-2.7.5-centos-6.7.tar.gz）</p>
+</li>
+<li><p>JDK（jdk-8u73-linux-x64.tar.gz）、</p>
+</li>
+</ul>
+<h3 id="集群规划"><a href="#集群规划" class="headerlink" title="集群规划"></a>集群规划</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>HDFS</th>
+<th>YRAN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hadoop02</td>
+<td>NameNode+DataNode</td>
+<td>NodeManager</td>
+</tr>
+<tr>
+<td>Hadoop03</td>
+<td>DataNode+SecondaryNameNode</td>
+<td>NodeManager</td>
+</tr>
+<tr>
+<td>Hadoop04</td>
+<td>DataNode</td>
+<td>NodeManager</td>
+</tr>
+<tr>
+<td>Hadoop05</td>
+<td>DataNode</td>
+<td>ResourceManager+NodeManager</td>
+</tr>
+</tbody></table>
+<p>集群共四个节点，HDFS主节点为Hadoop02，YRAN主节点为Hadoop05</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p><strong>集群搭建：Haddoop02、Hadoop03、Hadoop04、Hadoop05</strong></p>
+<ul>
+<li>各个节点必须固定IP地址，并互相配置集群所有的主机映射</li>
+<li>安装JDK，配置SSH免密登录（相互持有对方的公钥，就算是自己也需要持有）</li>
+<li>关闭防火墙，关闭防火墙自动开启（关系到web管理页面是否能访问成功）</li>
+<li>除root用户外，统一增加用户名：hadoop</li>
+<li>可以配置一个节点后，克隆其余三个节点</li>
+</ul>
+<p><strong>解压Hadoop安装包，这里指定路径：/home/hadoop/apps/hadoop-2.7.5</strong></p>
+<ul>
+<li><p>修改hadoop的环境变量：普通用户（~/etc/.bashrc），root用户（/etc/profile）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME&#x3D;&#x2F;home&#x2F;hadoop&#x2F;apps&#x2F;hadoop-2.7.5</span><br><span class="line">  </span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin:$HADOOP_HOME&#x2F;sbin</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>配置Hadoop配置文件（见下方详情）</strong></p>
+<ul>
+<li>先配置一个节点中的配置文件，然后通过scp分发到其余的节点</li>
+<li>所有节点的Hadoop安装路径和配置文件必须一致</li>
+</ul>
+<p><strong>分发安装包</strong></p>
+<p><code>scp</code>命令，需要配置SSH</p>
+<p><strong>启动Hadoop集群</strong></p>
+<ul>
+<li>初始化</li>
+<li>启动HDFS</li>
+<li>启动YARN</li>
+</ul>
+<p><strong>检测验证是否成功</strong></p>
+<ul>
+<li>JPS命令查看各个节点进程</li>
+<li>查看集群状态：<code>hdfs dfsadmin -report</code> 、<code>hadoop dfsadmin -report</code></li>
+<li>HDFSweb管理页面：<a target="_blank" rel="noopener" href="https://hadoop02:50070/">https://hadoop02:50070</a></li>
+<li>YARNweb管理页面：<a target="_blank" rel="noopener" href="https://hadoop05:8088/">https://hadoop05:8088</a></li>
+</ul>
+<h3 id="修改Hadoop配置文件"><a href="#修改Hadoop配置文件" class="headerlink" title="修改Hadoop配置文件"></a>修改Hadoop配置文件</h3><p>Hadoop配置文件需要修改六个，路径在：hadoop-2.7.5/etc/hadoop/</p>
+<p><img src="Hadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%5Cconf.png"></p>
+<p><strong>hadoop-env.sh</strong></p>
+<ul>
+<li><p>默认的JAVA_HOME变量，建议修改JAVA_HOME的路径为jdk的原始路径</p>
+<p><img src="Hadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%5Cjava.png" alt="hadoop-env.sh"></p>
+</li>
+</ul>
+<p><strong>core-site.xml</strong></p>
+<ul>
+<li><p>添加hdfs配置路径，文件上传端口，临时文件存放的目录等</p>
+<p><img src="hadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/core.png" alt="core-site.xml"></p>
+</li>
+</ul>
+<p><strong>hdfs-site.xml</strong></p>
+<ul>
+<li><p>namenode、datanode数据存储的目录，数据备份副本的个数，以及第二主节点</p>
+<p><img src="hadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/hdfs.png" alt="hdfs-site.xml"></p>
+</li>
+</ul>
+<p><strong>mapred-site.xml</strong></p>
+<ul>
+<li><p>配置名mapreduce-yarn管理</p>
+<p><img src="hadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/mapred.png" alt="mapred-site.xml"></p>
+</li>
+</ul>
+<p><strong>yarn-site.xml</strong></p>
+<ul>
+<li><p>yarn的主机名等</p>
+<p><img src="hadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/yarn.png" alt="yarn-site.xml"></p>
+</li>
+</ul>
+<p><strong>slaves</strong></p>
+<ul>
+<li><p>集群的节点列表。slaves文件中配置的是DataNode的所在节点服务，方便Hadoop启动时去寻找当前集群的节点，从而命令对应的服务器启动对应的进程</p>
+<p><img src="hadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/slaves.png" alt="slaves"></p>
+</li>
+</ul>
+<h3 id="分发"><a href="#分发" class="headerlink" title="分发"></a>分发</h3><p>通过<code>scp</code>，命令，将hadoop-2.7.5安装包分发到各个节点的相同位置上；</p>
+<p><code>scp local_file remote_username@remote_ip:remote_folder </code>，<code>-r</code>递归复制</p>
+<p>例：<code>scp -r /apps/hadoop-2.7.5 hadoop@hadoo02:~/apps/</code></p>
+<h3 id="启动Hadoop集群"><a href="#启动Hadoop集群" class="headerlink" title="启动Hadoop集群"></a>启动Hadoop集群</h3><ul>
+<li><p>初始化只能在主节点中进行：<code>（/home/hadoop/apps/hadoop-2.7.5/）bin/hadoop namenode -format</code></p>
+</li>
+<li><p>哪个节点启动HDFS均可：<code>（/home/hadoop/apps/hadoop-2.7.5/）sbin/start-dfs.sh</code></p>
+</li>
+<li><p>YARN启动必须在主节点：<code>（/home/hadoop/apps/hadoop-2.7.5/）sbin/start-yarn.sh</code></p>
+</li>
+</ul>
+</div><div class="tags"><a href="/tags/Hadoop/">Hadoop</a></div><div class="post-nav"><a class="pre" href="/archives/2018/03/11/">HDFS核心设计</a><a class="next" href="/archives/2018/02/27/">Hadoop生态体系</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://pross.space/archives/2018/03/03/';
+    this.page.identifier = 'archives/2018/03/03/';
+    this.page.title = 'Hadoop集群环境搭建';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//pross-space.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//pross-space.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://pross-space.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://pross.space"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Thrift/" style="font-size: 15px;">Thrift</a> <a href="/tags/HDFS/" style="font-size: 15px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 15px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 15px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/LeetCode/" style="font-size: 15px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MapReduce/" style="font-size: 15px;">MapReduce</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">随笔杂记</a> <a href="/tags/Swagger/" style="font-size: 15px;">Swagger</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/RPC/" style="font-size: 15px;">RPC</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/archives/2019/07/09/">Apache-Thrift-Thrift-Thrift</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/06/17/">远程过程调用</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/02/02/">使用Swagger2构建RESTful API</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/13/">散列表</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/01/">几种定时调度的介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/22/">Java线程池</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/16/">大O表示法</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/11/11/">你所忽视的排序算法（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/10/27/">你所忽视的排序算法（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/09/28/">相见</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="https://github.com/prosscode" title="Github" target="_blank">Github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">PROSS.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

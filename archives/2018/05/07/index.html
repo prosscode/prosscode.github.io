@@ -1,68 +1,80 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>HDFS NameNode内存全景 | PROSS</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><meta name="generator" content="Hexo 5.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">HDFS NameNode内存全景</h1><a id="logo" href="/.">PROSS</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a class="current" href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a><a href="/daysmatter/"><i class="fa fa-home"> DaysMatter</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">HDFS NameNode内存全景</h1><div class="post-meta">May 7, 2018</div><a class="disqus-comment-count" data-disqus-identifier="archives/2018/05/07/" href="/archives/2018/05/07/#disqus_thread"></a><div class="post-content"><blockquote>
+<p>在HDFS系统架构中，NameNode管理着整个文件系统的元数据，维护整个集群的机架感知信息和DataNode和Block的信息，Lease管理以及集中式缓存引入的缓存管理等等。从整个HDFS系统架构上来看，NameNode是最重要、最复杂也是最容易出现问题的地方。</p>
+</blockquote>
+<a id="more"></a>
 
-block title
-  title= page.title + ' | ' + config.title
-
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-      if theme.wordcount == true
-        include _partial/wordcount.pug
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if theme.changyan
-      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
-        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
-        span= ' ' + __('Comment')
-      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
-    if theme.valine.enable
-      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
-        span.valine-comment-count(data-xid=url_for(page.path))
-        span= ' ' + __('Comment')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
-    .post-content
-      != page.content
-    if theme.donate.enable == true
-      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
-
-    if theme.post_copyright.enable == true && page.copyright != false
-      div
-        ul.post-copyright
-          li.post-copyright-author
-            strong= __('copyright_author_prefix')
-            = theme.post_copyright.author
-          li.post-copyright-link
-            strong= __('copyright_link_prefix')
-            a(href='/' + page.path)= page.permalink
-          li.post-copyright-license
-            strong= __('copyright_declare_prefix')
-            if theme.post_copyright.copyright_text
-              != theme.post_copyright.copyright_text
-            else
-              != __('copyright_default_text')
-      br
-
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
-
-    include _partial/tag.pug
-    include _partial/post_nav.pug
-
-    if page.comments
-      include _partial/comments.pug
+<h4 id="NameNode概述"><a href="#NameNode概述" class="headerlink" title="NameNode概述"></a>NameNode概述</h4><p>NameNode管理的HDFS文件系统的元数据分为两个层次：NameSpace管理层，负责管理文件系统中的树状目录结构以及文件与数据块之间的映射关系；块管理层，负责管理文件系统中文件的物理块与实际存储位置的映射关系（BlockMap）。</p>
+<p>NameSpace管理的元数据除内存常驻外，也会周期Flush到持久化设备fsimage文件上（core-site.xml中配置<code>hadoop.tmp.dir</code>目录下的dfs/name/current中）；BlockMap元数据只存在于内存中；当NameNode发生重启，首先从持久化设备中读取fsimage，构建NameSpace的元数据信息，之后根据DataNode的汇报信息重新构造BlockMap，这两部分数据是占据NamNode大部分JVM Heap空间。</p>
+<h4 id="NameNode内存结构"><a href="#NameNode内存结构" class="headerlink" title="NameNode内存结构"></a>NameNode内存结构</h4><p><img src="HDFS-NameNode%E5%86%85%E5%AD%98%E5%85%A8%E6%99%AF%5Cnamenode.png" alt="namenode"></p>
+<p>NameNode常驻内存主要被NameSpace和BlockManager使用，二者使用占比分别接近50%。其它部分内存开销较小且相对固定，与NameSpace和BlockManager相比基本可以忽略。</p>
+<h4 id="NameNode内存分析"><a href="#NameNode内存分析" class="headerlink" title="NameNode内存分析"></a>NameNode内存分析</h4><h5 id="NameSpace"><a href="#NameSpace" class="headerlink" title="NameSpace"></a>NameSpace</h5><p><img src="HDFS-NameNode%E5%86%85%E5%AD%98%E5%85%A8%E6%99%AF%5Cnamespace.png" alt="namespace"></p>
+<p>HDFS文件系统的目录结构也是按照树状结构维护，NameSpace保存了目录树以及每个目录/文件节点的属性。在整个NameSpace目录树中存在两种不同类型的INode数据结构：<code>INodeDirectory</code>和<code>INodeFile</code>。其中INodeDirectory表示的是目录树中的目录，INodeFile表示的是目录树中的文件。<br><img src="HDFS-NameNode%E5%86%85%E5%AD%98%E5%85%A8%E6%99%AF%5Cinode.png" alt="inode"></p>
+<p>INodeDirectory和INodeFile均继承自INode，所以具备大部分相同的公共信息INodeWithAddititionalFields，除常用基础属性外，其中还提供了扩展属性features（如Quota，Snapshot等），如果以后出现新属性也可以通过feature扩展。不同的是，INodeFile特有的标识副本数和数据块大小组合的<code>header</code>（2.61之后新增了标识存储策略ID的信息）以及该文件包含的有序Block的数组；INodeDirectory特有的是列表<code>children</code>，children默认是大小为5的ArrayList类型，按照子节点name有序存储，在插入时会损失一部分写入的性能，但是可以方便后续快速二分查找提高读的性能，对于一般的存储系统，读操作比写操作占比要高。</p>
+<h5 id="BlockManager"><a href="#BlockManager" class="headerlink" title="BlockManager"></a>BlockManager</h5><p>NameNode概述中介绍的负责管理文件系统中文件的物理块与实际存储位置的映射关系（BlockMap）就是由BlockManager来统一管理。NameSpace和BlockMap之间通过前面提到的INodeFile有序Blocks数组关联到一起。<br><img src="HDFS-NameNode%E5%86%85%E5%AD%98%E5%85%A8%E6%99%AF%5Cblockinfo.png" alt="blockinfo"></p>
+<p>每一个INodeFile都会包含数量不等的Block，具体数量由文件大小及每一个Block的大小比值决定，这些Block按照所在的文件的先后顺序组成BlockInfo数组，BlockInfo维护的是Block的元数据，数据本身是由DataNode管理，所以BlockInfo需要包含实际数据且由DataNode管理的信息是名为triplets的Object数组，大小为3*replicas（replicas是Block副本数量，默认为3），从图中可以知道，BlockInfo包含了哪些Block，这些Block分别存储在哪些DataNode上。</p>
+<p>如何快速的通过BlockId快速定位到Block，这里还需要BlocksMap。</p>
+<p>BlocksMap底层通过LightWeightGSet实现，本质是一个链式解决冲突的Hash表。事实上，BlocksMap里所有的BlockInfo就是INodeFile中对应BlockInfo的引用，通过Block查找对应BlockInfo时，也是先对Block计算HashCode，根据结果快速定位到对应的BlockInfo信息。</p>
+<p><img src="HDFS-NameNode%E5%86%85%E5%AD%98%E5%85%A8%E6%99%AF%5CblocksMap.png" alt="blocksMap"></p>
+<p>这里还涉及到几个核心的数据结构：excessReplicateMap（多余的副本存放） ，neededReplications（需要补充Block的副本存放处，是一个优先级队列，缺少副本数越多的Block会优先处理），invalidateBlocks（删除的副本存放处） ，corruptReplicas（某些Block不可用暂存处）等。 </p>
+<p>相比Namespace，BlockManager管理的数据要复杂的多。</p>
+<h5 id="NetworkTopology"><a href="#NetworkTopology" class="headerlink" title="NetworkTopology"></a>NetworkTopology</h5><p>Hadoop在设计考虑到数据的安全和高效，默认存放三份副本。存储策略是本地一份，同机架内其他某一个节点上一份，不同机架的某一节点上一份，这样如果本地数据损坏了，节点可以从同一机架内的相邻节点拿到数据，速度肯定比从跨机架节点上拿到的数据要快；为了降低整体的带宽消耗和读取延时时间，HDFS会尽快让读取程序读取离它最近的副本。那么Hadoop确定任意两个节点是位于同一机架还是不同的机架呢？这就需要机架拓扑NetworkTopology，也叫作机架感知。<br>默认情况下，NameNode启动时日志信息是这样的：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018-05-09 19:27:26,423 INFO org.apache.hadoop.net.NetworkTopology: Adding a new node:  /default-rack/ 192.168.123.102:50010</span><br></pre></td></tr></table></figure>
+<p>每个IP对应的机架ID都是/default-rack，说明Hadoop的机架感知没有被启用。<br><strong>配置机架感知</strong><br>配置机架感知也很简单，NameNode所在的节点中，在<code>core-site.xml</code>文件中配置<code>topology.script.name</code>，value通常是一个shell脚本，该脚本接受一个参数，输出一个值。接受的参数通常为某台DataNode的IP地址，而输出的值通常为该IP地址对应的DataNode所在的rack。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>topology.script.file.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/apps/hadoop-2.6.5/etc/hadoop/topology.sh<span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<p><code>topology.sh</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span>  </span><br><span class="line">HADOOP_CONF=/home/bigdata/apps/hadoop/etc/hadoop  </span><br><span class="line">while [ $# -gt 0 ] ; do  </span><br><span class="line">  nodeArg=$1  </span><br><span class="line">  exec&lt;$&#123;HADOOP_CONF&#125;/topology.data</span><br><span class="line">  result=&quot;&quot;  </span><br><span class="line">  while read line ; do  </span><br><span class="line">    ar=( $line )  </span><br><span class="line">    if [ &quot;$&#123;ar[0]&#125;&quot; = &quot;$nodeArg&quot; ]||[ &quot;$&#123;ar[1]&#125;&quot; = &quot;$nodeArg&quot; ]; then  </span><br><span class="line">      result=&quot;$&#123;ar[2]&#125;&quot;  </span><br><span class="line">    fi  </span><br><span class="line">  done  </span><br><span class="line">  shift  </span><br><span class="line">  if [ -z &quot;$result&quot; ] ; then  </span><br><span class="line">    echo -n &quot;/default-rack&quot;  </span><br><span class="line">  else  </span><br><span class="line">    echo -n &quot;$result&quot;  </span><br><span class="line">  fi  </span><br><span class="line">  done  </span><br></pre></td></tr></table></figure>
+<p><code>topology.data</code>格式为：节点（IP或主机名） /交换机xx/机架xx</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.123.102 hadoop02 /switch/rack2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>配置后，NameNode启动时日志信息是这样的：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018-05-09 19:27:26,423 INFO org.apache.hadoop.net.NetworkTopology: Adding a new node:  /switch/rack2/ 192.168.123.102:50010</span><br></pre></td></tr></table></figure>
+<p>说明Hadoop的机架感知已经被启用了。查看Hadoop机架信息的命令<code>hadoop dfsadmin -printTopology </code></p>
+<h5 id="LeaseManager"><a href="#LeaseManager" class="headerlink" title="LeaseManager"></a>LeaseManager</h5><p>Lease 机制是重要的分布式协议，广泛应用于各种实际的分布式系统中。HDFS支持Write-Once-Read-Many，对文件写操作的互斥同步靠Lease实现。<br>Lease实际上是时间约束锁，其主要特点是排他性。客户端写文件时需要先申请一个Lease，一旦有客户端持有了某个文件的Lease，其它客户端就不可能再申请到该文件的Lease，这就保证了同一时刻对一个文件的写操作只能发生在一个客户端。<br>NameNode的LeaseManager是Lease机制的核心，维护了文件与Lease、客户端与Lease的对应关系，这类信息会随写数据的变化实时发生对应改变。 </p>
+<blockquote>
+<p>本文是根据<a target="_blank" rel="noopener" href="https://tech.meituan.com/namenode.html?_blank">美团点评技术团队中《HDFS NameNode内存全景》</a>整理总结</p>
+</blockquote>
+</div><div class="tags"><a href="/tags/HDFS/">HDFS</a></div><div class="post-nav"><a class="pre" href="/archives/2018/05/15/">Spark的运行模式</a><a class="next" href="/archives/2018/04/25/">Hadoop HA集群搭建</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://pross.space/archives/2018/05/07/';
+    this.page.identifier = 'archives/2018/05/07/';
+    this.page.title = 'HDFS NameNode内存全景';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//pross-space.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//pross-space.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://pross-space.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://pross.space"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Thrift/" style="font-size: 15px;">Thrift</a> <a href="/tags/HDFS/" style="font-size: 15px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 15px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Hibernate/" style="font-size: 15px;">Hibernate</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/LeetCode/" style="font-size: 15px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MapReduce/" style="font-size: 15px;">MapReduce</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">随笔杂记</a> <a href="/tags/Swagger/" style="font-size: 15px;">Swagger</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/RPC/" style="font-size: 15px;">RPC</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/archives/2019/07/09/">Apache-Thrift-Thrift-Thrift</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/06/17/">远程过程调用</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/02/02/">使用Swagger2构建RESTful API</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/13/">散列表</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2019/01/01/">几种定时调度的介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/22/">Java线程池</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/12/16/">大O表示法</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/11/11/">你所忽视的排序算法（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/10/27/">你所忽视的排序算法（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/archives/2018/09/28/">相见</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="https://github.com/prosscode" title="Github" target="_blank">Github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">PROSS.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>

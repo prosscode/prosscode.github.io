@@ -1,32 +1,3 @@
-+(function($, sr) {
-    // debouncing function from John Hann
-    // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
-    var debounce = function(func, threshold, execAsap) {
-        var timeout;
-
-        return function debounced() {
-            var obj = this, args = arguments;
-
-            function delayed() {
-                if (!execAsap) {
-                    func.apply(obj, args);
-                }
-
-                timeout = null;
-            };
-
-            if (timeout) {
-                clearTimeout(timeout);
-            }
-            else if (execAsap) {
-                func.apply(obj, args);
-            }
-
-            timeout = setTimeout(delayed, threshold || 100);
-        };
-    };
-
-    jQuery.fn[sr] = function(fn) {
-        return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr);
-    };
-})(jQuery, 'smartresize');
+// build time:Mon Aug 19 2019 23:01:12 GMT+0800 (中国标准时间)
++function(i,e){var n=function(i,e,n){var r;return function t(){var t=this,u=arguments;function f(){if(!n){i.apply(t,u)}r=null}if(r){clearTimeout(r)}else if(n){i.apply(t,u)}r=setTimeout(f,e||100)}};jQuery.fn[e]=function(i){return i?this.bind("resize",n(i)):this.trigger(e)}}(jQuery,"smartresize");
+//rebuild by neat 
