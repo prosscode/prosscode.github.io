@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://pross.space/archives/2021/01/17/copy-line.jpg">
 <meta property="og:image" content="https://pross.space/archives/2021/01/17/compression.png">
 <meta property="article:published_time" content="2021-01-17T10:35:08.000Z">
-<meta property="article:modified_time" content="2021-01-17T11:38:25.595Z">
+<meta property="article:modified_time" content="2021-01-17T11:41:52.384Z">
 <meta property="article:author" content="RukiapR0ss">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Kafka">
@@ -136,7 +136,7 @@
 <h5 id="批量压缩"><a href="#批量压缩" class="headerlink" title="批量压缩"></a>批量压缩</h5><p>在大多数的情况下，系统服务的瓶颈不是CPU或磁盘，而是网络I/O；通过网络传输文件，发送消息接受响应都是会占据一定的网络I/O开销，进行数据压缩会消耗少量的CPU资源，不过对于Kafka而言。网络I/O更应该需要考虑。</p>
 <p>Kafka将多条消息一起压缩，而不是单个消息压缩，并且批量的消息可以通过压缩的形式进行传输和保存，直到被消费者消费时才解压。Kafka支持四种压缩算法：GZIP，Snappy，LZ4和Zstd。</p>
 <p>下面这张表是 Facebook Zstandard（Zstd）官网提供的一份压缩算法比较结果：</p>
-<p><img src="./compression.png" alt="img"></p>
+<p><img src="./compression.png" alt="compression"></p>
 <p>看一个压缩算法的优劣，有两个重要的指标：一个指标是压缩比，原先占100M空间的文件经压缩之后占20M空间，那么压缩比就是 5，压缩比越高越好；另一个指标是压缩和解压缩的吞吐量，比如每秒能压缩或解压缩多少 MB 的数据，吞吐量越高越好。</p>
 <p>另外对于Kafka压缩，Producer端和Broker端配置是分开的，所以得要保证两端的压缩配置是相同的，不然就会出现多余的解压和重新压缩。</p>
 <p>不可否认，文件分段存储（Topic-Partition-Segment）的机制（Topic被分为了多个区partition, 每个partition又分为了多个segment，所以一个队列中的消息实际上是保存在N多个片段文件中，通过分段的方式，每次文件操作都是对一个小文件的操作，同时也增加了并行处理能力），利用Offset偏移量快速寻找到到哪去消费消息来减少随机I/O，以及批量发送的机制也是其中的因素。</p>

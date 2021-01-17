@@ -20,14 +20,14 @@
 <meta property="og:site_name" content="Pross&#39;s Blog">
 <meta property="og:description" content="Spark是围绕RDD的概念展开的，RDD是可以并行操作的容错元素集合。RDD全称是Resilient Distributed Datasets（弹性分布式数据集） 理解RDD如果你在Spark集群中加载了一个很大的文本数据，Spark就会将该文本抽象为一个RDD，这个RDD根据你定义的分区策略（比如HashKey）可以分为数个Partition，这样就可以对各个分区进行并行处理，从而提高效率。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pross.space/archives/2019/05/29/%E7%90%86%E8%A7%A3Spark%E6%A0%B8%E5%BF%83%E4%B9%8BRDD%5CnarrowAndwide.jpg">
-<meta property="og:image" content="https://pross.space/archives/2019/05/29/%E7%90%86%E8%A7%A3Spark%E6%A0%B8%E5%BF%83%E4%B9%8BRDD%5Crdd-dependencies.png">
+<meta property="og:image" content="https://pross.space/archives/2019/05/29/narrowAndwide.jpg">
+<meta property="og:image" content="https://pross.space/archives/2019/05/29/rdd-dependencies.png">
 <meta property="article:published_time" content="2019-05-29T09:04:41.000Z">
-<meta property="article:modified_time" content="2021-01-17T11:09:49.207Z">
+<meta property="article:modified_time" content="2021-01-17T11:42:59.110Z">
 <meta property="article:author" content="RukiapR0ss">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pross.space/archives/2019/05/29/%E7%90%86%E8%A7%A3Spark%E6%A0%B8%E5%BF%83%E4%B9%8BRDD%5CnarrowAndwide.jpg">
+<meta name="twitter:image" content="https://pross.space/archives/2019/05/29/narrowAndwide.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Pross&#39;s Blog" type="application/atom+xml">
   
@@ -93,8 +93,8 @@
 <h4 id="RDD原理"><a href="#RDD原理" class="headerlink" title="RDD原理"></a>RDD原理</h4><p>RDD实际上是一个类（sc.textFile()方法返回一个RDD对象，然后用line接收这个对象），而这个RDD类中也定义了一系列的用于操作的方法，也就是一些算子操作。</p>
 <p>这个类为了实现对数据的操作，里面有分区信息，用于记录特定RDD的分区情况；依赖关系，指向其父RDD；一个函数，用于记录父RDD到自己的转换操作；划分策略和数据位置的元数据。在DAG中这样的RDD就可以看成一个个节点，RDD中的存储的依赖关系就是DAG的边。在Spark中，数据在物理上被划分为一个个的block，这些block由blockmanager统一管理的。</p>
 <p>在设计RDD之间的依赖关系时，设计者将RDD之间的依赖关系分为两类：窄依赖和宽依赖。RDD作为数据结构，本质上是一个只读的分区记录集合。一个RDD可以包含多个分区，每个分区就是一个DataSet片段。RDD可以相互依赖，如果RDD的每个分区最多只能被一个Child RDD的一个分区使用，则称之位narrow dependency（窄依赖）；若多个Child RDD分区都可以依赖，则称为wide dependency（宽依赖），而join操作则会产生wide dependency。</p>
-<p><img src="%E7%90%86%E8%A7%A3Spark%E6%A0%B8%E5%BF%83%E4%B9%8BRDD%5CnarrowAndwide.jpg" alt="narrow和wide"></p>
-<p><img src="%E7%90%86%E8%A7%A3Spark%E6%A0%B8%E5%BF%83%E4%B9%8BRDD%5Crdd-dependencies.png" alt="narrow和wide的区别"></p>
+<p><img src="./narrowAndwide.jpg" alt="narrow和wide"></p>
+<p><img src="./rdd-dependencies.png" alt="narrow和wide的区别"></p>
 <blockquote>
 <p>Spark之所以将依赖分为narrow与wide，基于以下两点原因：</p>
 <p>narrow dependecies可以支持在同一个cluster node上，并且以管道形式执行多行命令，例如在执行了map操作后，紧接着执行filter。相反，wide dependencies需要所有的父分区都是可用的，可能还需要调用类似MapReduce之类的操作进行跨节点传递。</p>
