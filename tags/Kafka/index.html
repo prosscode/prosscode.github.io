@@ -84,7 +84,7 @@
       <p>今天这篇文章分享的主题是：Kafka无消息丢失配置，以及分析一些常见的消息丢失案例。</p>
 <p>在这之前，我们需要清楚，Kafka丢失消息的几种场景。比如：producer生产者把消息写入topic中，broker端并没有接收到，消息在去的路上丢失了；broker端接收到了消息，但是consumer并没有消费到这条数据，消息在broker端丢失了；broker端接收到了消息，但是consumer消费者并没有消费到，消息在来的路上丢失了。</p>
 <p>这几种场景其实就是Kafka架构决定的。</p>
-<p><img src="./kafka-design.png" alt="kafka-design"></p>
+<p><img src="./kafka-no-message-loss-configuration/kafka-design.png" alt="kafka-design"></p>
     
   </div>
   <footer class="end-sep">

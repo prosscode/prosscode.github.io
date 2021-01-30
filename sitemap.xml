@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://pross.space/blog/2021/01/17/why-is-kafka-fast.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://pross.space/blog/2021/01/30/kafka-no-message-loss-configuration.html</loc>
     
     <lastmod>2021-01-30</lastmod>
@@ -73,13 +80,6 @@
   
   <url>
     <loc>https://pross.space/blog/2018/10/27/sorting-algorithm-that-you-overlooked-on.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2021/01/17/why-is-kafka-fast.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
