@@ -66,6 +66,47 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/blog/2021/03/14/kafka-log-message-analysis.html">
+  <time datetime="2021-03-14T06:49:39.000Z">
+    2021-03-14
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/blog/2021/03/14/kafka-log-message-analysis.html">Kafka日志消息解析</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>我们知道，写入kafka的消息都需要指定一个Topic（主题），Kafka可以根据Topic来对消息进行区分，每个Topic又将分为多个Partition（分区）；Partition的概念是为了实现高伸缩性和提供负载均衡的作用，可以很好的让一个比较大的（数据量级）Topic中的消息可以分布到多台broker机器上。</p>
+<p>不仅如此，也可以提高并行能力，因为水平扩展后可以以Partition为粒度进行读写，这样每个broker节点都能独立执行各自分区的读写请求；Partition下就是Log的消息体，每条消息都只会保存在某一个分区中，而且在每个Partition下消息都是append模式写入的，也就是说，每个Partition下的消息都是顺序性的。</p>
+<p>Kafka消息设计方式就是这三层结构：主题-分区-消息；说到设计，不同的分布式系统对分区的叫法也不大一样，在Kafka中的概念是Partition（分区），在ES中叫做Shard（分片），而在HBase中被称为Region。从表面上来看实现原理可能不尽相同，但对底层实现的思想却都是一致的。</p>
+<p>话题扯回来，今天这篇文章分享的主题是：Kafka消息格式解析。</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/blog/2021/03/14/kafka-log-message-analysis.html#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/blog/2021/01/30/kafka-no-message-loss-configuration.html">
   <time datetime="2021-01-30T07:13:16.000Z">
     2021-01-30
@@ -84,7 +125,6 @@
       <p>今天这篇文章分享的主题是：Kafka无消息丢失配置，以及分析一些常见的消息丢失案例。</p>
 <p>在这之前，我们需要清楚，Kafka丢失消息的几种场景。比如：producer生产者把消息写入topic中，broker端并没有接收到，消息在去的路上丢失了；broker端接收到了消息，但是consumer并没有消费到这条数据，消息在broker端丢失了；broker端接收到了消息，但是consumer消费者并没有消费到，消息在来的路上丢失了。</p>
 <p>这几种场景其实就是Kafka架构决定的。</p>
-<p><img src="./kafka-no-message-loss-configuration/kafka-design.png" alt="kafka-design"></p>
     
   </div>
   <footer class="end-sep">

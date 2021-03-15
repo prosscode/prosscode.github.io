@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://pross.space/blog/2021/01/30/kafka-no-message-loss-configuration/kafka-design.png">
 <meta property="og:image" content="https://pross.space/blog/2021/01/30/kafka-no-message-loss-configuration/kafka-offset.png">
 <meta property="article:published_time" content="2021-01-30T07:13:16.000Z">
-<meta property="article:modified_time" content="2021-01-30T08:24:00.370Z">
+<meta property="article:modified_time" content="2021-03-15T04:35:58.537Z">
 <meta property="article:author" content="RukiapR0ss">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Kafka">
@@ -88,9 +88,9 @@
       <p>今天这篇文章分享的主题是：Kafka无消息丢失配置，以及分析一些常见的消息丢失案例。</p>
 <p>在这之前，我们需要清楚，Kafka丢失消息的几种场景。比如：producer生产者把消息写入topic中，broker端并没有接收到，消息在去的路上丢失了；broker端接收到了消息，但是consumer并没有消费到这条数据，消息在broker端丢失了；broker端接收到了消息，但是consumer消费者并没有消费到，消息在来的路上丢失了。</p>
 <p>这几种场景其实就是Kafka架构决定的。</p>
-<p><img src="./kafka-no-message-loss-configuration/kafka-design.png" alt="kafka-design"></p>
 <a id="more"></a>
 
+<p><img src="./kafka-no-message-loss-configuration/kafka-design.png" alt="kafka-design"></p>
 <p>其次，我们也需要清楚，Kafka在什么情况下能保证消息不丢失。用胡夕老师的话总结：<strong>Kafka只对”已提交”的消息（commited message），做有限度的持久化保证</strong>。</p>
 <p>“已提交”是表示，当Kafka的broker成功接收到了某条消息，写入到日志文件中，并且告诉producer生产者这条消息已经成功提交后，这条消息才算已提交。”有限度的持久化保证”意思是，Kafka不可能保证任何情况下做到不丢数据，比如，broker服务器全炸毁了，这种情况不可能做到不丢数据，但是如果消息保存在N个broker中，那么N个broker只要有一个存活，就可以保证消息不丢失。</p>
 <p>所以理解了不丢失含义和丢失的场景后，我们分析下常见消息丢失的场景。</p>
