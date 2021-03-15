@@ -81,10 +81,11 @@
   
   <div class="entry">
     
-      <p>我们知道，写入kafka的消息都需要指定一个Topic（主题），Kafka可以根据Topic来对消息进行区分，每个Topic又将分为多个Partition（分区）；Partition的概念是为了实现高伸缩性和提供负载均衡的作用，可以很好的让一个比较大的（数据量级）Topic中的消息可以分布到多台broker机器上。</p>
-<p>不仅如此，也可以提高并行能力，因为水平扩展后可以以Partition为粒度进行读写，这样每个broker节点都能独立执行各自分区的读写请求；Partition下就是Log的消息体，每条消息都只会保存在某一个分区中，而且在每个Partition下消息都是append模式写入的，也就是说，每个Partition下的消息都是顺序性的。</p>
-<p>Kafka消息设计方式就是这三层结构：主题-分区-消息；说到设计，不同的分布式系统对分区的叫法也不大一样，在Kafka中的概念是Partition（分区），在ES中叫做Shard（分片），而在HBase中被称为Region。从表面上来看实现原理可能不尽相同，但对底层实现的思想却都是一致的。</p>
-<p>话题扯回来，今天这篇文章分享的主题是：Kafka消息格式解析。</p>
+      <p>我们知道，写入kafka的消息都需要指定一个Topic（主题），Kafka可以根据Topic来对消息进行区分，每个Topic分为多个Partition（分区）。</p>
+<p>Partition的概念是为了实现高伸缩性和提供负载均衡的作用，可以很好的让一个比较大的（数据量级）Topic中的消息可以分布到多台broker机器上。不仅如此，也可以提高并行能力，因为水平扩展后可以以Partition为粒度进行读写，这样每个broker节点都能独立执行各自分区的读写请求；</p>
+<p>Partition下就是Log的消息体，每条消息都只会保存在某一个分区中，而且在每个Partition下消息都是append模式写入的，也就是说，每个Partition下的消息都是顺序性的。</p>
+<p>Kafka消息设计方式就是这样的三层结构：主题-分区-消息；说到设计，不同的分布式系统对分区的叫法也不大一样，在Kafka中的概念是Partition（分区），在ES中叫做Shard（分片），而在HBase中被称为Region。从表面上来看实现原理可能不尽相同，但对底层实现的思想却都是一致的。</p>
+<p>话题扯回来，今天这篇文章分享的主题是：Kafka消息格式。</p>
     
   </div>
   <footer class="end-sep">
