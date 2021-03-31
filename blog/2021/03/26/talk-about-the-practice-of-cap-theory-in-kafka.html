@@ -20,24 +20,24 @@
 <meta property="og:site_name" content="Pross&#39;s Blog">
 <meta property="og:description" content="在现在发布的绝大部分项目中，大部分都是采用的分布式系统架构。分布式系统可以防止系统突然宕机导致服务整体不可用，可以从容的应对高并发请求，从而提高系统的可用性。但是如果实现一个分布式系统，经过一段时间的编码和设计，其实会发现并没有这么简单。 相比于单机系统，分布式系统需要多台服务器，而服务器之间的通信是需要绝对保障的；如果通信超时，会影响项目的正常运行；如果是分布式存储系统（不仅仅是），写入的数据也">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://image-static.segmentfault.com/272/788/2727887823-5afe4f365241b_fix732">
-<meta property="og:image" content="https://static001.infoq.cn/resource/image/83/88/83afae5ea62d63d69c69cd650ae14e88.png">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-944238b824c604d817109c0b1a51469d_1440w.jpg">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210330205720472.png">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210330210206783.png">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210331121057234.png">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210331154511228.png">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210331121501503.png">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210331122644365.png">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210331154534551.png">
-<meta property="og:image" content="https://pross.space/Users/shuang.peng/Library/Application%20Support/typora-user-images/image-20210331161222850.png">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/cap.png">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/replica.png">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/log.png">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/fetch-1.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/response.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/fetch-2.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/case-crash.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/case-1.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/case-2.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/leader-epoch.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/solve-case.jpg">
 <meta property="article:published_time" content="2021-03-26T10:13:25.000Z">
-<meta property="article:modified_time" content="2021-03-31T12:17:09.461Z">
+<meta property="article:modified_time" content="2021-03-31T12:28:42.350Z">
 <meta property="article:author" content="RukiapR0ss">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Kafka">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://image-static.segmentfault.com/272/788/2727887823-5afe4f365241b_fix732">
+<meta name="twitter:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/cap.png">
   
     <link rel="alternate" href="/atom.xml" title="Pross&#39;s Blog" type="application/atom+xml">
   
@@ -111,7 +111,7 @@
 </ul>
 <p>根据定理，分布式系统只能满足三项中的两项而不可能满足全部三项。</p>
 <p><strong>理解CAP理论最简单方式是想象两个节点分在分区两侧（出现网络分区故障）</strong>，允许至少一个节点更新状态会导致数据不一致，即丧失了C性质（无法通信，数据不一致）。如果为了保证数据一致性，将分区一侧的节点设置为不可用，那么又丧失了A性质（服务高可用）。除非两个节点可以互相通信，才能既保证C又保证A，这又会导致丧失P性质（不满足分区容错）。</p>
-<img src="https://image-static.segmentfault.com/272/788/2727887823-5afe4f365241b_fix732" style="zoom:75%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/cap.png" style="zoom:75%;" />
 
 <p>对于需要在分布式条件下运行的系统而言，如果在一致性、可用性和分区容错性中取舍（或者说是弱化）哪一个属性是首要考虑的问题。在现实场景中，网络分区故障是比较容易出现的问题，并且人为因素也有可能导致，因此往往选择就在CP或者AP中，但是往往也不是严格的AP或者CP系统，比如Apache Zookeeper：</p>
 <p>Zookeeper是用于分布式系统中的协调服务，用于同步，节点状态、配置等信息、服务注册等信息，所以一定得需要数据的一致性，任何时刻对ZooKeeper的访问请求能得到一致的数据结果。</p>
@@ -136,7 +136,7 @@
 <li>将第i个Partition的第j个Replica分配到第（ (i + j) mod n）个Broker上</li>
 </ul>
 <p>这样做的好处是，如果所有的Replica都在同一个Broker上，那一旦该Broker宕机，该Partition的所有Replica都无法工作；如果Replica分散在不同的Broker机器上，则可以尽可能的避免这个问题，从而尽可能的达到Partition的高可用。Replica个数是由<code>replication.factor</code>参数决定。</p>
-<img src="https://static001.infoq.cn/resource/image/83/88/83afae5ea62d63d69c69cd650ae14e88.png" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/replica.png" style="zoom:50%;" />
 
 <p>通过Replica，可以解决Partition的高可用问题，但是又出现了几个新的问题：Producer发送消息，Replica之间怎么同步消息？Producer怎么才确认Broker已经收到消息了呢？如果Replica都不可用了怎么办？这我们得来说说，ISR(in-sync replicas)副本策略。</p>
 <p><strong>ISR副本策略</strong></p>
@@ -153,30 +153,30 @@
 <h4 id="Kafka一致性"><a href="#Kafka一致性" class="headerlink" title="Kafka一致性"></a>Kafka一致性</h4><p>关于保证一致性部分，用词说的是，尽可能的保证了数据一致性。为什么这样说？在这之前，我们先简单介绍Kafka的高水位(High Watermark，HW）和日志末端位移（Log End offset，LEO）概念以及Kafka副本同步消息的详细流程。</p>
 <p><strong>High Watermark和Log End offset</strong></p>
 <p>高水位（HW）其实就是表示的是已经提交(commit)的最大日志偏移量；而日志末端位移（LEO）是记录了该副本日志(Log)中下一条消息的位移值，比如LEO=10，表示副本日志中保存了10条消息，位移范围值是[0-9]。</p>
-<img src="https://pic2.zhimg.com/80/v2-944238b824c604d817109c0b1a51469d_1440w.jpg" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/log.png" style="zoom:50%;" />
 
 <p>已经提交的日志和未提交的日志的区别在于，Consumer是否能够消费到，所以在HW位移位置以下，即被Leader和ISR副本集合内的Follower都确认commit写入本地的消息，都可以认为是不会丢失的。所以在上图中，可被消费的消息位移范围值是[0-7]，[8-14]表示已经写入当前节点副本的本地的Log中，但还没被commit的消息日志。</p>
 <p><strong>Kafka副本同步消息</strong></p>
 <p>我们假设两个副本：Leade副本A和Follower副本B，且都ISR副本集合中，初始状态如下：</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210330205720472.png" alt="image-20210330205720472" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/fetch-1.jpg" style="zoom:50%;" />
 
 <p>Leader节点会缓存一份其它副本的LEO值（remote LEO），Leader副本会依赖remote LEO值来更新HW（ISR副本集合中的所有副本都成功写入，Leader HW才会更新）。Leader副本更新HW值=max (currentHW, min(LEO-1, LEO-2, ……，LEO-n) )，Follower副本更新HW值=min(currentHW, currentLEO)。</p>
 <p>当Producer给分区发送一条消息后，Leader会写入到本地Log中，并更新自己的LEO；Follower会带上自己的LEO值，发起fetch request来pull数据；Leader收到请求后，会更新remote LEO和HW值，并带上自己的HW值和消息log，传输给Follower副本；Follower副本接收到消息，写入本地Log中，并更新自己的LEO值，状态变更如下：</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210330210206783.png" alt="image-20210330210206783" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/response.jpg" style="zoom:50%;" />
 
 <p>各自都发送请求后，Leader和Follower副本的LEO都是1，但各自的HW依然是 0，还没有被更新。在第二次Follower发起fetch request请求后，Leader更新remote LEO=1，然后更新Leader HW为1。更新完后，Leader会将当前已更新过的HW=1的值发送给 Follower 副本，Follower副本根据min(leader hw, leo)计算来更新自己的HW值，最终状态如下：</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210331121057234.png" alt="image-20210331121057234" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/fetch-2.jpg" style="zoom:50%;" />
 
 <p>了解完这些后，我们能发现，其实Follower副本的HW更新需要第二次request请求才能得到更新，也就是说Leader副本HW更新和 Follower副本HW更新在时间上是存在错位的，这种错位在某些场景下就会导致“数据丢失” 或 “数据不一致”的问题。</p>
 <p>我们假设一个特定的场景（<a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/KAFKA/KIP-101+-+Alter+Replication+Protocol+to+use+Leader+Epoch+rather+than+High+Watermark+for+Truncation#KIP101AlterReplicationProtocoltouseLeaderEpochratherthanHighWatermarkforTruncation-LeaderEpoch">KAFKA/KIP-101</a>），Follower副本写入Log后，Leader副本节点宕机或不可用状态，经过选举后Follower副本成为Leader副本。</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210331154511228.png" alt="image-20210331154511228" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/case-crash.jpg" style="zoom:50%;" />
 
 <p>情况一：副本B成为Leader后，发现自己的HW=0，也就是说副本B的offset=1的数据是未提交确认的，副本B会做一个日志截断(log truncation)，把offset=1的消息日志删除掉，并调整LEO=1；等副本A恢复过来，发送请求同步Leader副本B的数据，发现Leader副本的HW=0，同样也会进行一个日志截断，和Leader副本数据保持一致。</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210331121501503.png" alt="image-20210331121501503" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/case-1.jpg" style="zoom:50%;" />
 
 <p>这种情况会导致，原本已经写入副本A的数据会丢失，因为Producer端认为该消息日志已经提交，已经开始进行下一条消息的写入流程了，实际Kafka并没有存储到这条消息，导致Consumer根本消费不到。</p>
 <p>情况二：副本B成为Leader后，也会进行日志截断，此时HW=0，LEO=1，副本A还没有恢复；当接收到了Producer发来的新消息（绿色框），副本B会更新LEO=2，HW=1，这时副本A恢复了，发送请求同步Leader副本B的数据，发现不需要进行日志截断和写入。</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210331122644365.png" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/case-2.jpg" style="zoom:50%;" />
 
 <p>这种情况会导致，Leader副本A的日志和Follower副本B的数据不一致；在下次选举切换Leader副本后，新的Consumer消费该分区的数据会和之前Consumer消费的数据部分不一致。</p>
 <p>导致数据不一致或丢失的根本原因是HW值被用于衡量副本写入日志的成功与否以及在出现宕机恢复时，作为日志截断的位移依据；但之前我们说过，Leader副本和Follower副本的HW值的更新时间是存在时间错位的，Follower需要额外的FETCH请求才能更新HW值。</p>
@@ -189,11 +189,11 @@
 </ul>
 <p>比如有两对值 (0, 0)和(1, 100)，表示第一个Leader从位移0开始写入消息；共写了120条[0, 99]；而第二个Leader版本号是1，从位移120处开始写入消息。Broker会把Leader Epoch数据缓存起来，并定期写入分区副本的日志文件leader-epoch-checkpoint中。</p>
 <p>当Leader副本写入Log时，Broker会尝试更新，如果这个Leader首次写消息，则会在缓存中增加一条记录；而每次副本重新成为Leader时，会首先查询这部分缓存，获取出对应Leader版本的位移，在进行判断。</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210331154534551.png" alt="image-20210331154534551" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/leader-epoch.jpg" style="zoom:50%;" />
 
 <p>我们看看数据丢失的情况：引用Leader Epoch机制后，Follower副本B需要向Leader副本A发送OffsetsForLeadErepochRequest请求并同步数据，Leader副本A返回自身的LEO=2的值，此时副本B发现Leader副本的LEO值并不比自己的LEO值小，且缓存中也没有保存任何起始位移值大于Leader副本的LEO值，故不做任何日志截断的操作。</p>
 <p>现在Leader副本A宕机，副本B成为Leader。同样地，当副本A重启回来后，执行与副本B相同的逻辑判断，发现也不用执行日志截断，至此位移值为1的那条消息在两个副本中均得到保留。后面当Producer程序向Leader副本B写入新消息时，Leader副本B所在的 Broker缓存中，会生成新的 Leader Epoch 条目：[Epoch=1, Offset=2]。之后，副本B会使用这条记录帮助判断后续是否执行日志截断操作。这样，通过 Leader Epoch 机制，Kafka可以规避了这种数据丢失的场景。</p>
-<img src="/Users/shuang.peng/Library/Application Support/typora-user-images/image-20210331161222850.png" alt="image-20210331161222850" style="zoom:50%;" />
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/solve-case.jpg" style="zoom:50%;" />
 
 <p>我们再看看数据不一致的情况：副本B成为Leader副本后发现leader epoch缓存的位移值并没有大于自身的LEO值2，故不会做截断操作，保留了自身的offset=1的消息，并更新自身的HW=1。等副本A恢复后，发送请求同步Leader副本B的数据，执行相同的判断逻辑，也不需要进行日志截断，这样看来，两个副本的消息就保持了一致。</p>
 <p>通过Leader Epoch机制，对高水位机制有了一个明显改进，即副本是否执行日志截断不再依赖于高水位进行判断，从而解决数据丢失和一致性问题。</p>
