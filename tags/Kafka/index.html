@@ -68,6 +68,47 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka.html">
+  <time datetime="2021-03-26T10:13:25.000Z">
+    2021-03-26
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka.html">谈谈Kafka中CAP理论的实践</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>在现在发布的绝大部分项目中，大部分都是采用的分布式系统架构。分布式系统可以防止系统突然宕机导致服务整体不可用，可以从容的应对高并发请求，从而提高系统的可用性。但是如果实现一个分布式系统，经过一段时间的编码和设计，其实会发现并没有这么简单。</p>
+<p>相比于单机系统，分布式系统需要多台服务器，而服务器之间的通信是需要绝对保障的；如果通信超时，会影响项目的正常运行；如果是分布式存储系统（不仅仅是），写入的数据也需要被同步到多台服务器上，数据更新肯定是有一定的延迟的，怎么权衡延迟时间和数据实时性的要求更需要被考虑；如果是Leader服务器宕机了，follower服务器需要立刻自动切换角色，提供服务，且要保证数据一致性等等，这些都是在分布式系统设计中需要被面对的问题。</p>
+<p>有没有一个架构或框架，能够解决在分布式系统中面临的问题？答案是没有。这个问题起源于加州大学柏克莱分校（University of California, Berkeley）的计算机科学家埃里克·布鲁尔（Eric Brewer），在2000年的分布式计算原理研讨会（PODC）上提出的猜想。但在2002年，麻省理工学院的赛斯·吉尔伯特和南希·林奇证明了布鲁尔的猜想，使之成为一个定理，这个就是<strong>CAP定理</strong>（CAP theorem），也被称作<strong>布鲁尔定理</strong>（Brewer’s theorem）。</p>
+<p>Kafka是一个典型的分布式系统，涉及到数据存储和数据传递（通信），Kafka在设计和开发的过程中，是怎么合理的解决分布式系统普遍面临的这些问题的呢？那么今天的这篇文章，来谈谈CAP理论在Kafka中的实践。</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka.html#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/blog/2021/03/14/kafka-log-message-analysis.html">
   <time datetime="2021-03-14T06:49:39.000Z">
     2021-03-14

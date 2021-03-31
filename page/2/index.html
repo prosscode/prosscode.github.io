@@ -66,6 +66,46 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/blog/2019/09/09/apachethriftthriftthrift.html">
+  <time datetime="2019-09-09T15:10:18.000Z">
+    2019-09-09
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/blog/2019/09/09/apachethriftthriftthrift.html">Apache-Thrift-Thrift-Thrift</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>接着上篇文章说。</p>
+<p>我们知道了Apache Thrift主要用于各个服务之间的RPC通信，并且支持跨语言；包括C++，Java，Python，PHP，Ruby，Go，Node.js等等，还有一些都没听说过的语言；而且从上篇文章的RPC例子中可以发现，Thrift是一个典型的CS（客户端/服务端）架构；加上跨语言的特性，我们可以推断一下：客户端和服务端是可以使用不同的语言开发的。</p>
+<p>如果CS端可以使用不同的语言来开发，那么一定是有一种中间语言来关联客户端和服务端（相同语言也需要关联客户端和服务端）。其实这个答案都知道，那就是接口定义语言：IDL（Interface Description Language）；下面我们从IDL进行开场表演，进行一次Thrift RPC的完整演出。</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/blog/2019/09/09/apachethriftthriftthrift.html#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/blog/2019/08/23/hdfs-namenode-memory-panorama.html">
   <time datetime="2019-08-23T02:55:52.000Z">
     2019-08-23
@@ -248,45 +288,6 @@
       
         <div class="alignleft">
           <a href="/blog/2019/02/02/use-swagger2-to-build-a-restful-api.html#more" class="more-link">Read More</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/blog/2019/01/13/hash-table.html">
-  <time datetime="2019-01-13T14:55:23.000Z">
-    2019-01-13
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/blog/2019/01/13/hash-table.html">散列表</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>关于算法系列，在前面已经整理过大O表示法和排序算法相关的文章，今天接着上次的话说一说散列表（Hash Table，也叫哈希表），顺便穿插和另外两种基本的数据结构，数组和链表比较；并在最后介绍良好的散列函数——SHA函数的使用。这三种基本数据结构，可简可繁，在写代码时候都是比较频繁使用的，那我们先从散列表开始入手。</p>
-<p>散列表是根据键（Key）而直接访问在内存存储位置的数据结构。也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。这个映射函数称做<code>散列函数</code>，存放记录的数组称做<code>散列表</code>。散列表是最有用的基本数据结构之一，我们需要总结散列表：实现、冲突和散列函数。</p>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/blog/2019/01/13/hash-table.html#more" class="more-link">Read More</a>
         </div>
       
       
