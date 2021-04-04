@@ -21,6 +21,8 @@
 <meta property="og:description" content="现在发布的绝大部分项目，大部分都是采用的分布式系统架构。分布式系统可以防止系统突然宕机导致服务整体不可用，可以从容的应对高并发请求，从而提高系统的可用性。但是如果实现一个分布式系统，经过一段时间的编码和设计，其实会发现并没有这么简单。 相比于单机系统，分布式系统需要多台服务器，而服务器之间的通信是需要绝对保障的；如果通信超时，会影响项目的正常运行；如果是分布式存储系统（不仅仅是），写入的数据也需要">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/cap.png">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/controller.jpg">
+<meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/controller_epoch.jpg">
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/replica.png">
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/log.png">
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/fetch-1.jpg">
@@ -32,7 +34,7 @@
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/leader-epoch.jpg">
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/leader-epoch-solve.jpg">
 <meta property="article:published_time" content="2021-03-26T10:13:25.000Z">
-<meta property="article:modified_time" content="2021-03-31T12:46:47.020Z">
+<meta property="article:modified_time" content="2021-04-04T09:52:01.545Z">
 <meta property="article:author" content="RukiapR0ss">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Kafka">
@@ -109,18 +111,32 @@
 <li>可用性（Availability），表示服务高可用，即分布式服务在正常响应时间内一直是可用状态。</li>
 <li>分区容错性（Partition tolerance），分区相当于对通信的时限要求。即当遇到网络分区故障时，仍然可满足一致性和可用性服务。</li>
 </ul>
-<p>根据定理，分布式系统只能满足三项中的两项而不可能满足全部三项。</p>
-<p><strong>理解CAP理论最简单方式是想象两个节点分在分区两侧（出现网络分区故障）</strong>，允许至少一个节点更新状态会导致数据不一致，即丧失了C性质（无法通信，数据不一致）。如果为了保证数据一致性，将分区一侧的节点设置为不可用，那么又丧失了A性质（服务高可用）。除非两个节点可以互相通信，才能既保证C又保证A，这又会导致丧失P性质（不满足分区容错）。</p>
+<p>根据定理，分布式系统只能满足三项中的两项而不可能满足全部三项。<strong>理解CAP理论最简单方式是想象两个节点分在分区两侧（出现网络分区故障）</strong>，允许至少一个节点更新状态会导致数据不一致，即丧失了C性质（无法通信，数据不一致）。如果为了保证数据一致性，将分区一侧的节点设置为不可用，那么又丧失了A性质（服务高可用）。除非两个节点可以互相通信，才能既保证C又保证A，这又会导致丧失P性质（不满足分区容错）。</p>
 <img src="./talk-about-the-practice-of-cap-theory-in-kafka/cap.png" style="zoom:75%;" />
 
-<p>对于需要在分布式条件下运行的系统而言，如果在一致性、可用性和分区容错性中取舍（或者说是弱化）哪一个属性是首要考虑的问题。在现实场景中，网络分区故障是比较容易出现的问题，并且人为因素也有可能导致，因此往往选择就在CP或者AP中，但是往往也不是严格的AP或者CP系统，比如Apache Zookeeper：</p>
+<p>对于需要在分布式条件下运行的系统而言，如果在一致性、可用性和分区容错性中取舍（或者说是弱化）哪一个属性是首要考虑的问题。在现实场景中，网络分区故障是比较容易出现的问题，并且人为因素也有可能导致，因此往往选择就在CP或者AP中，但是往往也不是严格的AP或者CP系统，比如Apache Zookeeper。</p>
 <p>Zookeeper是用于分布式系统中的协调服务，用于同步，节点状态、配置等信息、服务注册等信息，所以一定得需要数据的一致性，任何时刻对ZooKeeper的访问请求能得到一致的数据结果。</p>
 <p>我们采用理解CAP理论的方式来理解Zookeeper的设计：Zookeeper采用ZAB（ZooKeeper Atomic Broadcast）协议（崩溃恢复和消息广播模式），当出现网络崩溃等异常情况，ZAB协议进入恢复模式，并选举产生新的Leader服务器，当集群中已经有过半的Follower服务器完成了和Leader服务器的状态同步，那么整个服务框架就可以进入消息广播模式。当有同样遵守 ZAB 协议的服务器（因为出现了网络故障）启动后加入到集群中时，如果此时集群中已经存在一个 Leader 服务器在负责进行消息广播 ， 那么新加的服务器就会自觉地进入数据恢复模式：找到 Leader 所在的服务器，并与其进行数据同步，然后一起参与到消息广播流程中去，并提供数据一致性服务。</p>
 <p>但是在恢复模式中，选举Leader节点可能花费时间较长，这就导致在选举期间服务会短暂不可用，但是服务能够最终是恢复了。所以说，在ZooKeeper设计中，为了实现CP特性，就不得不弱化了服务高可用性，但是这不代表Zookeeper完全失去了AP特性。</p>
-<p>所以，如果将精力浪费在思考如何设计能满足三者的完美系统上是错误的路线，应该根据应用场景进行适当的配置来进行取舍。那么，Kafka是满足了CAP定理的哪两种特性呢？</p>
-<p>接下来我们看看Kafka在设计时，是如何进行适当权衡的。</p>
-<h3 id="Kafka可用性"><a href="#Kafka可用性" class="headerlink" title="Kafka可用性"></a>Kafka可用性</h3><p>对于分布式系统来说，当集群规模上升到一定程度后，一台或者多台机器宕机的可能性会大大提高，这是一个概率问题。所以，对于Failover机制的要求也非常高，对于Kafka消息引擎系统而言，如果频繁出现数据丢失或在一定时间内服务不可用的问题，这绝对不是不可容忍的，于是Kafka在0.8版本之后，提供了High Availablity机制。</p>
-<p>在分布式系统中，我们都说可用性保证的是该服务的高可用；但是在Kafka只要有一台Broker正常存在，那么就可以继续提供服务的，因为Kafka的元数据保存在Zookeeper中，只要Broker存在，既可以提供正常的服务。那么既然如此，Kafka提供的服务是提供的什么？Kafka高可用性保证是什么？</p>
+<p>所以，如果将精力浪费在思考如何设计能满足三者的完美系统上是错误的路线，应该根据应用场景进行适当的配置来进行取舍。那么接下来我们看看Kafka在设计时，是如何进行适当的权衡。</p>
+<h3 id="Kafka可用性"><a href="#Kafka可用性" class="headerlink" title="Kafka可用性"></a>Kafka可用性</h3><p>对于分布式系统来说，当集群规模上升到一定程度后，一台或者多台机器宕机的可能性会大大提高，这是一个概率问题。所以，对于Failover机制的要求也非常高，对于Kafka消息引擎系统而言，如果频繁出现数据丢失或在一定时间内服务不可用的问题，这绝对不是不可容忍的，于是Kafka在0.8版本之后，经由Zookeeper提供了High Availablity机制。</p>
+<h3 id="Broker-Failover"><a href="#Broker-Failover" class="headerlink" title="Broker Failover"></a>Broker Failover</h3><p>在Kafka集群中有一个Controller角色，主要作用是在ZooKeeper的帮助下管理和协调整个 Kafka集群。集群中任意一台Broker都能充当Controller角色，但是，在运行过程中，只能有一个 Broker成为Controller，行使其管理和协调的职责。</p>
+<p>Controller Broker的主要职责有很多，主要包括以下几个方面：</p>
+<ul>
+<li>创建、删除主题，增加分区并分配leader分区</li>
+<li>集群Broker管理（新增 Broker、Broker 主动关闭、Broker故障)</li>
+<li>Leader选举</li>
+<li>分区重分配</li>
+</ul>
+<p>Broker在启动时，会尝试去 ZooKeeper 中创建<code>/controller</code>节点。Kafka当前选举控制器的规则是：第一个成功创建 /controller 节点的 Broker 会被指定为Controller Broker。</p>
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/controller.jpg" alt="image-20210404173245900" style="zoom:50%;" />
+
+<p>我们理解CAP定理的方式是假设集群出现网络分区或故障的情况，再来考虑是否满足其他特性的方式。所以我们假设Kafka集群中出现脑裂现象，即导致的结果是存在两个Controller Broker，它们可能一起发出具有冲突的命令。</p>
+<p>Kafka是通过使用<strong>epoch number</strong>（纪元编号，也称为隔离令牌）来完成的。epoch number只是单调递增的数字，第一次选出Controller Broker时，epoch number值为1；如果再次选出新的Controller，则epoch number将为2，依次单调递增。</p>
+<p>每个新选出的Controller通过Zookeeper的递增操作获得一个全新的、数值更大的epoch number 。其他Broker在知道当前epoch number 后，如果收到由controller发出的包含较旧（较小）epoch number的消息，就会忽略它们，即Broker根据最大的epoch number来区分当前最新的Controller。</p>
+<img src="./talk-about-the-practice-of-cap-theory-in-kafka/controller_epoch.jpg" style="zoom:50%;" />
+
+<p>通过这个机制，我们就可以解决脑裂问题，也就是在存在P的情况下，保证了A性质。这里，我们都说可用性保证的是服务的高可用；但是在Kafka只要有一台Broker正常存在，也可以继续提供服务的，我们可以继续思考：如果Kafka服务保证高可用了，那么高可用的服务能提供高可用的消息吗？</p>
 <p>显而易见，如果一旦有一个或多个Broker宕机，如果没有高可用机制，则宕机期间其上所有Partition都无法继续提供服务；如果该Broker出现了磁盘故障，永远不能再恢复了，那么该服务器上所有的数据就彻底丢失了，那么消息是否能够正常获取或消费，决定着Kafka是否能够提供正常服务。所以，对于Kafka而言，提供的是消息可用性服务；那服务高可用在于，保证Kafka中消息的高可用性。</p>
 <p>所以，Kafka在保障消息的高可用性上，推出了几项机制：</p>
 <ul>
