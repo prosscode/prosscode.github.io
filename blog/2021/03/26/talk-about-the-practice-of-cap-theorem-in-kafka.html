@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
-  <title>谈谈Kafka中CAP理论的实践 | Pross&#39;s Blog</title>
+  <title>谈谈Kafka中CAP定理的实践 | Pross&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
     <meta name="author" content="RukiapR0ss">
@@ -15,8 +15,8 @@
   
   <meta name="description" content="如今绝大部分项目，大部分都是采用的分布式系统架构。分布式系统可以防止系统突然宕机导致服务整体不可用，可以从容的应对高并发请求，从而提高系统的可用性。但是如果实现一个分布式系统，经过一段时间的编码和设计，其实会发现并没有这么简单。 相比于单机系统，分布式系统需要多台服务器，而服务器之间的通信是需要绝对保障的；如果通信超时，会影响项目的正常运行；如果是分布式存储系统（不仅仅是），写入的数据也需要被同步">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谈谈Kafka中CAP理论的实践">
-<meta property="og:url" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka.html">
+<meta property="og:title" content="谈谈Kafka中CAP定理的实践">
+<meta property="og:url" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theorem-in-kafka.html">
 <meta property="og:site_name" content="Pross&#39;s Blog">
 <meta property="og:description" content="如今绝大部分项目，大部分都是采用的分布式系统架构。分布式系统可以防止系统突然宕机导致服务整体不可用，可以从容的应对高并发请求，从而提高系统的可用性。但是如果实现一个分布式系统，经过一段时间的编码和设计，其实会发现并没有这么简单。 相比于单机系统，分布式系统需要多台服务器，而服务器之间的通信是需要绝对保障的；如果通信超时，会影响项目的正常运行；如果是分布式存储系统（不仅仅是），写入的数据也需要被同步">
 <meta property="og:locale" content="en_US">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/leader-epoch.jpg">
 <meta property="og:image" content="https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka/leader-epoch-solve.jpg">
 <meta property="article:published_time" content="2021-03-26T10:13:25.000Z">
-<meta property="article:modified_time" content="2021-04-04T10:06:14.148Z">
+<meta property="article:modified_time" content="2021-04-04T10:17:38.697Z">
 <meta property="article:author" content="RukiapR0ss">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="Kafka">
@@ -83,7 +83,7 @@
   <header>
     
       <div class="icon"></div>
-      <a href="/blog/2021/03/26/talk-about-the-practice-of-cap-theory-in-kafka.html">
+      <a href="/blog/2021/03/26/talk-about-the-practice-of-cap-theorem-in-kafka.html">
   <time datetime="2021-03-26T10:13:25.000Z">
     2021-03-26
   </time>
@@ -91,7 +91,7 @@
     
     
   
-    <h1 class="title">谈谈Kafka中CAP理论的实践</h1>
+    <h1 class="title">谈谈Kafka中CAP定理的实践</h1>
   
 
   </header>
