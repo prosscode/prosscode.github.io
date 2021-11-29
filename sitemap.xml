@@ -11,7 +11,16 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2021/03/26/talk-about-the-practice-of-cap-theorem-in-kafka.html</loc>
+    <loc>https://pross.space/blog/2021/03/14/.html</loc>
+    
+    <lastmod>2021-04-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2021/03/26/.html</loc>
     
     <lastmod>2021-04-04</lastmod>
     
@@ -20,16 +29,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2021/03/14/kafka-log-message-analysis.html</loc>
-    
-    <lastmod>2021-03-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2019/09/09/apachethriftthriftthrift.html</loc>
+    <loc>https://pross.space/blog/2019/09/09/.html</loc>
     
     <lastmod>2021-03-30</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/04/16/decorator-pattern.html</loc>
+    <loc>https://pross.space/blog/2018/04/16/.html</loc>
     
     <lastmod>2021-03-30</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2021/01/30/kafka-no-message-loss-configuration.html</loc>
+    <loc>https://pross.space/blog/2021/01/30/.html</loc>
     
     <lastmod>2021-03-15</lastmod>
     
@@ -65,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2021/01/17/why-is-kafka-fast.html</loc>
+    <loc>https://pross.space/blog/2021/01/17/.html</loc>
     
     <lastmod>2021-02-01</lastmod>
     
@@ -74,7 +74,79 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/12/16/big-o-notation.html</loc>
+    <loc>https://pross.space/blog/2018/03/28/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2018/03/18/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2019/03/15/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2018/10/27/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2018/09/24/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2018/11/11/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2018/12/16/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2019/05/29/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2019/08/17/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -92,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/11/11/sorting-algorithm-that-you-overlooked-below.html</loc>
+    <loc>https://pross.space/blog/2021/01/30/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -101,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/05/29/understand-the-rdd-at-core-of-spark.html</loc>
+    <loc>https://pross.space/blog/2018/03/17/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -110,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/08/17/remote-procedure-call.html</loc>
+    <loc>https://pross.space/blog/2018/03/11/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -119,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/03/18/mapreduce-programming-case-on.html</loc>
+    <loc>https://pross.space/blog/2018/04/25/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -128,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/09/24/how-long-does-it-take-you-to-become-a-fool.html</loc>
+    <loc>https://pross.space/blog/2018/02/27/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -137,7 +209,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/03/15/spark-operating-mode.html</loc>
+    <loc>https://pross.space/blog/2018/03/03/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -146,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/10/27/sorting-algorithm-that-you-overlooked-on.html</loc>
+    <loc>https://pross.space/blog/2017/10/16/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -155,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/03/28/shuffle-details-of-mapreduce-programming-framework.html</loc>
+    <loc>https://pross.space/blog/2018/12/22/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -164,7 +236,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/12/10/analysis-of-sparkstreaming-mapwithstate.html</loc>
+    <loc>https://pross.space/blog/2017/11/27/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -173,7 +245,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/12/22/java-thread-pool.html</loc>
+    <loc>https://pross.space/blog/2018/04/05/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -182,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2017/11/27/create-and-delete-users-under-linux.html</loc>
+    <loc>https://pross.space/blog/2019/10/19/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -191,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/01/13/hash-table.html</loc>
+    <loc>https://pross.space/blog/2019/12/10/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -200,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/02/02/use-swagger2-to-build-a-restful-api.html</loc>
+    <loc>https://pross.space/blog/2019/02/02/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -209,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/03/17/hdfs-core-api-programming-case.html</loc>
+    <loc>https://pross.space/blog/2019/01/13/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -218,7 +290,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/01/01/introduction-and-realization-of-several-timing-scheduling.html</loc>
+    <loc>https://pross.space/blog/2018/08/25/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -227,7 +299,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/02/27/hadoop-ecosystem.html</loc>
+    <loc>https://pross.space/blog/2018/09/28/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -236,25 +308,7 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/09/28/meet.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2019/08/23/hdfs-namenode-memory-panorama.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2018/08/25/untitled.html</loc>
+    <loc>https://pross.space/blog/2019/01/01/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -264,60 +318,6 @@
   
   <url>
     <loc>https://pross.space/daysmatter/index.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2018/04/05/mapreduce-programming-case-below.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2019/10/19/analysis-of-sparkstreaming-updatestatebykey.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2018/04/25/hadoop-ha-cluster-construction.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2017/10/16/hibernate-core-configuration-file-summary.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2018/03/11/hdfs-core-design.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2018/03/03/hadoop-cluster-environment-construction.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
