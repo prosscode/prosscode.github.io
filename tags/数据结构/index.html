@@ -1,182 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  
-  <title>Tag: 数据结构 | Pross&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
-    <meta name="author" content="RukiapR0ss">
-  
-  
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Pross&#39;s Blog">
-<meta property="og:url" content="https://pross.space/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
-<meta property="og:site_name" content="Pross&#39;s Blog">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="RukiapR0ss">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Pross&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+{% extends 'includes/layout.swig' %}
 
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body>
-  <div class="wrapper">
-    <header id="header">
-  <div class="title">
-    <h1><a href="/">Pross&#39;s Blog</a></h1>
-    <p><a href="/"></a></p>
+{% block body %}
+  <div id="tag">
+    <h1>{{ page.tag }}</h1>
+    {% for postItem in site.posts.toArray() %}
+      {% set isShow = false %}
+      {% for tag in postItem.tags %}
+        {% if tag.name === page.tag %}
+          {% set isShow = true %}
+        {% endif %}
+      {% endfor %}
+      {% if isShow %}
+      {% include 'includes/post-title-item.swig' %}
+      {% endif %}
+    {% endfor %}
   </div>
-  <nav class="nav">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/about">About</a></li>
-      
-        <li><a href="/daysmatter">Daysmatter</a></li>
-      
-      
-        <li><a href="/atom.xml">RSS</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
-</header>
-    <div class="content">
 
-
-<h2 class="archives-title tag"><span>数据结构</span></h2>
-
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/blog/2019/.html">
-  <time datetime="2019-01-13T14:55:23.000Z">
-    2019-01-13
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/blog/2019/.html">散列表</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>关于算法系列，在前面已经整理过大O表示法和排序算法相关的文章，今天接着上次的话说一说散列表（Hash Table，也叫哈希表），顺便穿插和另外两种基本的数据结构，数组和链表比较；并在最后介绍良好的散列函数——SHA函数的使用。这三种基本数据结构，可简可繁，在写代码时候都是比较频繁使用的，那我们先从散列表开始入手。</p>
-<p>散列表是根据键（Key）而直接访问在内存存储位置的数据结构。也就是说，它通过计算一个关于键值的函数，将所需查询的数据映射到表中一个位置来访问记录，这加快了查找速度。这个映射函数称做<code>散列函数</code>，存放记录的数组称做<code>散列表</code>。散列表是最有用的基本数据结构之一，我们需要总结散列表：实现、冲突和散列函数。</p>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/blog/2019/.html#more" class="more-link">Read More</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/blog/2018/.html">
-  <time datetime="2018-12-16T14:44:52.000Z">
-    2018-12-16
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/blog/2018/.html">大O表示法</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>前面有两篇总结了排序算法，最近刚好在看《算法图解》，想由表及里整理一份算法系列。每次介绍算法时，都会讨论其运行时间，一般而言，应选择效率最高的算法，以最大限度地减少运行时间或占用空间。那怎么表示算法的速度呢，今天来了解一下：大O表示法。</p>
-<h5 id="理解大O表示法"><a href="#理解大O表示法" class="headerlink" title="理解大O表示法"></a>理解大O表示法</h5><p>大O表示法是一种特殊的表示法，指出了算法的速度有多快。我们举个例子：假设列表包含n个元素，简单的查询需要检查每个元素，因此需要执行n次操作。使用大O表示法，这个运行时间为：O(n)。单位？没有，大O表示法指的是算法运行时间的增速，不需要单位来描述。</p>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/blog/2018/.html#more" class="more-link">Read More</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
-
-</div>
-  </div>
-  <footer id="footer"><div class="copyright">
-  
-  &copy; 2021 <a href="/">RukiapR0ss</a>
-  
-</div>
-<div class="theme-copyright">
-  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
-   | 
-  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-<script src="/js/scale.fix.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-  (function($){
-    $('.fancybox').fancybox();
-  })(jQuery);
-</script>
-
-</body>
-</html>
+  {# {% include 'includes/pagination.swig' %} #}
+{% endblock %}
