@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://pross.space/blog/2021/.html</loc>
+    
+    <lastmod>2021-11-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://pross.space/blog/2017/.html</loc>
     
     <lastmod>2021-11-28</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://pross.space/blog/2021/.html</loc>
     
     <lastmod>2021-04-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pross.space/blog/2021/.html</loc>
-    
-    <lastmod>2021-04-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -173,15 +173,6 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2018/.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pross.space/blog/2021/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
@@ -227,15 +218,6 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2017/.html</loc>
-    
-    <lastmod>2021-01-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pross.space/blog/2018/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
@@ -263,7 +245,16 @@
   </url>
   
   <url>
-    <loc>https://pross.space/blog/2019/.html</loc>
+    <loc>https://pross.space/blog/2017/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2018/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
@@ -300,6 +291,15 @@
   
   <url>
     <loc>https://pross.space/blog/2018/.html</loc>
+    
+    <lastmod>2021-01-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pross.space/blog/2019/.html</loc>
     
     <lastmod>2021-01-30</lastmod>
     
