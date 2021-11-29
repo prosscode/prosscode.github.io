@@ -67,6 +67,44 @@
     
       <div class="icon"></div>
       <a href="/blog/2019/.html">
+  <time datetime="2019-12-10T01:56:59.000Z">
+    2019-12-10
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/blog/2019/.html">SparkStreaming之解析mapWithState</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>最近经历挫折教育，今天闲得时间，整理状态管理之解析mapWithState。今天说道的mapWithState是从Spark1.6开始引入的一种新的状态管理机制，支持输出全量的状态和更新的状态，支持对状态超时的管理，和自主选择需要的输出。</p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/blog/2019/.html#more" class="more-link">Read More</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/blog/2019/.html">
   <time datetime="2019-10-19T10:52:15.000Z">
     2019-10-19
   </time>
@@ -243,45 +281,6 @@
       <p>Spark是新一代基于内存的计算框架，是用于大规模数据处理的同意分析引擎。相比于Hadoop MapReduce计算框架，Spark将中间计算结果保留在内存中，速度提升10~100倍；同时采用弹性分布式数据集（RDD）实现迭代计算，更好的适用于数据挖掘、机器学习，极大的提升开发效率。</p>
 <p>Spark的运行模式，它不仅支持单机模式，同时支持集群模式运行；这里具体的总结一下Spark的各种运行模式的区分。</p>
 <h4 id="Local模式"><a href="#Local模式" class="headerlink" title="Local模式"></a>Local模式</h4><p>Local模式又称本地模式，通过Local模式运行非常简单，只需要把Spark的安装包解压后，改一些常用的配置即可使用，而不用启动Spark的Master、Worker进程（只有集群的Standalone模式运行时，才需要这两个角色），也不用启动Hadoop的服务，除非你需要用到HDFS。</p>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/blog/2019/.html#more" class="more-link">Read More</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/blog/2019/.html">
-  <time datetime="2019-02-01T17:00:44.000Z">
-    2019-02-02
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/blog/2019/.html">使用Swagger2构建RESTful API</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>吐槽了一阵公司提供的记录接口文档工具后，抽个空档时间搭了个RESTful风格的API文档Demo，感觉还不错，在这里记录一下，技术栈使用Spring Boot+Swagger2。</p>
-<p>Swagger可以很轻松的整合到Spring Boot中，在代码里根据swagger语法打些标签，生成可预览的Api文档，减少了很多时间写API接口文档上，让维护文档和修改代码整合一体了，并且可以与Spring MVC程序配合组织出强大RESTful API文档，也能提供了强大的页面测试功能来调试测试每个接口。</p>
     
   </div>
   <footer class="end-sep">
