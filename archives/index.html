@@ -1,7 +1,12 @@
-{% extends 'includes/layout.swig' %}
+extends partial/layout
 
-{% block body %}
-  <article>
-    {% include 'includes/recent-posts.swig' %}
-  </article>
-{% endblock %}
+block container
+    include mixins/post
+    +postList()
+
+block pagination
+    include mixins/paginator
+    +home()
+
+block copyright
+    include partial/copyright

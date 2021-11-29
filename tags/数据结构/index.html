@@ -1,20 +1,12 @@
-{% extends 'includes/layout.swig' %}
+extends partial/layout
 
-{% block body %}
-  <div id="tag">
-    <h1>{{ page.tag }}</h1>
-    {% for postItem in site.posts.toArray() %}
-      {% set isShow = false %}
-      {% for tag in postItem.tags %}
-        {% if tag.name === page.tag %}
-          {% set isShow = true %}
-        {% endif %}
-      {% endfor %}
-      {% if isShow %}
-      {% include 'includes/post-title-item.swig' %}
-      {% endif %}
-    {% endfor %}
-  </div>
+block container
+    include mixins/post
+    +postList()
 
-  {# {% include 'includes/pagination.swig' %} #}
-{% endblock %}
+block pagination
+    include mixins/paginator
+    +home()
+
+block copyright
+    include partial/copyright
