@@ -6,7 +6,7 @@
   <link href="https://pross.space/atom.xml" rel="self"/>
   
   <link href="https://pross.space/"/>
-  <updated>2021-12-05T02:45:24.774Z</updated>
+  <updated>2025-07-06T15:38:13.520Z</updated>
   <id>https://pross.space/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>first-voice</title>
+    <link href="https://pross.space/blog/2025/first-voice/"/>
+    <id>https://pross.space/blog/2025/first-voice/</id>
+    <published>2025-07-06T14:54:12.000Z</published>
+    <updated>2025-07-06T15:38:13.520Z</updated>
+    
+    <content type="html"><![CDATA[<audio controls autoplay>  <source src="./cut_voice_lotso.m4a" type="audio/mp4"></audio>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;audio controls autoplay&gt;
+  &lt;source src=&quot;./cut_voice_lotso.m4a&quot; type=&quot;audio/mp4&quot;&gt;
+&lt;/audio&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>谈谈Kafka中CAP定理的实践</title>
@@ -415,29 +437,6 @@
     
     
     <summary type="html">&lt;p&gt;金出武雄（Kanade Takeo）是美国卡内基·梅隆大学（CMU）的机器人视觉研究所所长，也是世界上最重要的计算机是视觉研究人员之一。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="随笔杂记" scheme="https://pross.space/tags/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>无题</title>
-    <link href="https://pross.space/blog/2018/untitled/"/>
-    <id>https://pross.space/blog/2018/untitled/</id>
-    <published>2018-08-25T14:36:25.000Z</published>
-    <updated>2021-12-05T03:05:57.510Z</updated>
-    
-    <content type="html"><![CDATA[<p>岁月还在眼眸打坐，你的凝望</p><p>也许在苦等，有不朽的诗句</p><p>说完这些话后我的梦想已经有拔节之声</p><p>我蜷缩起双腿</p><p>似乎是在为每一段时光致敬</p><span id="more"></span><p><img src="./Authony.jpg"></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;岁月还在眼眸打坐，你的凝望&lt;/p&gt;
-&lt;p&gt;也许在苦等，有不朽的诗句&lt;/p&gt;
-&lt;p&gt;说完这些话后我的梦想已经有拔节之声&lt;/p&gt;
-&lt;p&gt;我蜷缩起双腿&lt;/p&gt;
-&lt;p&gt;似乎是在为每一段时光致敬&lt;/p&gt;</summary>
     
     
     
